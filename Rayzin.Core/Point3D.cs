@@ -4,8 +4,11 @@ namespace Rayzin.Core
 {
     public struct Point3D : IEquatable<Point3D>
     {
-        public static readonly Point3D Zero = new Point3D(0, 0, 0);
-        public static readonly Point3D Origo = new Point3D(0, 0, 0);
+        public struct Presets
+        {
+            public static readonly Point3D Zero = new Point3D(0, 0, 0);
+            public static readonly Point3D Origo = new Point3D(0, 0, 0);
+        }
 
         public Point3D(double x, double y, double z) => (X, Y, Z) = (x, y, z);
         public void Deconstruct(out double x, out double y, out double z) => (x, y, z) = (X, Y, Z);

@@ -29,7 +29,7 @@ namespace Rayzin.Core
             get
             {
                 if (x < 0 || y < 0 || x >= Width || y >= Height)
-                    return ColorF.Black;
+                    return ColorF.Presets.Black;
 
                 return _Pixels[x, y];
             }
@@ -108,7 +108,7 @@ namespace Rayzin.Core
             File.WriteAllText(filename, ToPpm(), Encoding.ASCII);
         }
 
-        public void Clear() => Clear(ColorF.Black);
+        public void Clear() => Clear(ColorF.Presets.Black);
 
         public void Clear(ColorF color)
         {

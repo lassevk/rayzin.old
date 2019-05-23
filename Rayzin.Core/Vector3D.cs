@@ -4,11 +4,14 @@ namespace Rayzin.Core
 {
     public struct Vector3D : IEquatable<Vector3D>
     {
-        public static readonly Vector3D Zero = new Vector3D(0, 0, 0);
-        public static readonly Vector3D UnitX = new Vector3D(1, 0, 0);
-        public static readonly Vector3D UnitY = new Vector3D(0, 1, 0);
-        public static readonly Vector3D UnitZ = new Vector3D(0, 0, 1);
-        
+        public struct Presets
+        {
+            public static readonly Vector3D Zero = new Vector3D(0, 0, 0);
+            public static readonly Vector3D UnitX = new Vector3D(1, 0, 0);
+            public static readonly Vector3D UnitY = new Vector3D(0, 1, 0);
+            public static readonly Vector3D UnitZ = new Vector3D(0, 0, 1);
+        }
+
         public Vector3D(double x, double y, double z) => (X, Y, Z) = (x, y, z);
         public void Deconstruct(out double x, out double y, out double z) => (x, y, z) = (X, Y, Z);
 

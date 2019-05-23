@@ -4,7 +4,14 @@ namespace Rayzin.Core
 {
     public struct ColorF : IEquatable<ColorF>
     {
-        public static readonly ColorF Black = new ColorF(0, 0, 0);
+        public struct Presets
+        {
+            public static readonly ColorF Black = new ColorF(0, 0, 0);
+            public static readonly ColorF Red = new ColorF(1, 0, 0);
+            public static readonly ColorF Green = new ColorF(0, 1, 0);
+            public static readonly ColorF Blue = new ColorF(0, 0, 1);
+            public static readonly ColorF White = new ColorF(1, 1, 1);
+        }
 
         public ColorF(double red, double green, double blue) => (Red, Green, Blue) = (red, green, blue);
         public void Deconstruct(out double red, out double green, out double blue) => (red, green, blue) = (Red, Green, Blue);
@@ -51,7 +58,7 @@ namespace Rayzin.Core
         public ColorF Normalize()
         {
             if (Math.Abs(Red) < 1e-5 && Math.Abs(Green) < 1e-5 && Math.Abs(Blue) < 1e-5)
-                return Black;
+                return Presets.Black;
 
             var magnitude = Magnitude;
             return new ColorF(Red / magnitude, Green / magnitude, Blue / magnitude);

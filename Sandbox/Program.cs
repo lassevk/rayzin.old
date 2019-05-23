@@ -19,7 +19,7 @@ namespace Sandbox
                 int x = (int)(p.Position.X);
                 int y = canvas.Height - (int)(p.Position.Y);
 
-                canvas[x, y] = new ColorF(1, 0, 0);
+                canvas[x, y] = ColorF.Presets.Red;
             }
 
             canvas.SaveToPpm(@"D:\temp\test.ppm");
