@@ -4,6 +4,11 @@ namespace Rayzin.Core
 {
     public struct Vector3D : IEquatable<Vector3D>
     {
+        public static readonly Vector3D Zero = new Vector3D(0, 0, 0);
+        public static readonly Vector3D UnitX = new Vector3D(1, 0, 0);
+        public static readonly Vector3D UnitY = new Vector3D(0, 1, 0);
+        public static readonly Vector3D UnitZ = new Vector3D(0, 0, 1);
+        
         public Vector3D(double x, double y, double z) => (X, Y, Z) = (x, y, z);
 
         public double X { get; }
@@ -39,7 +44,6 @@ namespace Rayzin.Core
 
         public static Vector3D operator *(Vector3D v, double scalar) => new Vector3D(v.X * scalar, v.Y * scalar, v.Z * scalar);
         public static Vector3D operator *(double scalar, Vector3D v) => new Vector3D(v.X * scalar, v.Y * scalar, v.Z * scalar);
-        public static double operator *(Vector3D v1, Vector3D v2) => v1.X * v2.X + v1.Y * v2.Y + v1.Z * v2.Z;
         
         public static Vector3D operator /(Vector3D v, double scalar) => new Vector3D(v.X / scalar, v.Y / scalar, v.Z / scalar);
 
@@ -50,5 +54,8 @@ namespace Rayzin.Core
             var magnitude = Magnitude;
             return new Vector3D(X / magnitude, Y / magnitude, Z / magnitude);
         }
+
+        public double Dot(Vector3D v) => X * v.X + Y * v.Y + Z * v.Z;
+        public Vector3D Cross(Vector3D v) => new Vector3D(Y * v.Z - Z * v.Y, Z * v.X - X * v.Z, X * v.Y - Y * v.X);
     }
 }

@@ -201,9 +201,25 @@ namespace Rayzin.Core.Tests
             var v1 = new Vector3D(x1, y1, z1);
             var v2 = new Vector3D(x2, y2, z2);
 
-            var output = v1 * v2;
+            var output = v1.Dot(v2);
 
             Assert.That(output, Is.EqualTo(expected).Within(1e-5));
+        }
+
+        [Test]
+        [TestCase(1, 2, 3, 2, 3, 4, -1, 2, -1)]
+        [TestCase(2, 3, 4, 1, 2, 3, 1, -2, 1)]
+        public void CrossProduct_WithTestCases_ProducesCorrectResults(
+            double x1, double y1, double z1, double x2, double y2, double z2, double expectedX, double expectedY, double expectedZ)
+        {
+            var v1 = new Vector3D(x1, y1, z1);
+            var v2 = new Vector3D(x2, y2, z2);
+
+            var output = v1.Cross(v2);
+
+            Assert.That(output.X, Is.EqualTo(expectedX).Within(1e-5));
+            Assert.That(output.Y, Is.EqualTo(expectedY).Within(1e-5));
+            Assert.That(output.Z, Is.EqualTo(expectedZ).Within(1e-5));
         }
     }
 }
