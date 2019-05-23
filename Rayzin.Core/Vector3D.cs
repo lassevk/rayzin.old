@@ -10,6 +10,7 @@ namespace Rayzin.Core
         public static readonly Vector3D UnitZ = new Vector3D(0, 0, 1);
         
         public Vector3D(double x, double y, double z) => (X, Y, Z) = (x, y, z);
+        public void Deconstruct(out double x, out double y, out double z) => (x, y, z) = (X, Y, Z);
 
         public double X { get; }
         public double Y { get; }

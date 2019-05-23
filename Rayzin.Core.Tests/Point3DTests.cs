@@ -107,5 +107,17 @@ namespace Rayzin.Core.Tests
             Assert.That(p2.Y, Is.EqualTo(5).Within(1e-5));
             Assert.That(p2.Z, Is.EqualTo(3).Within(1e-5));
         }
+
+        [Test]
+        public void Deconstruct_Point3D_ProducesExpectedResults()
+        {
+            var p = new Point3D(4, 3, 2);
+
+            (var x, var y, var z) = p;
+
+            Assert.That(x, Is.EqualTo(4).Within(1e-5));
+            Assert.That(y, Is.EqualTo(3).Within(1e-5));
+            Assert.That(z, Is.EqualTo(2).Within(1e-5));
+        }
     }
 }

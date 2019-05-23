@@ -221,5 +221,17 @@ namespace Rayzin.Core.Tests
             Assert.That(output.Y, Is.EqualTo(expectedY).Within(1e-5));
             Assert.That(output.Z, Is.EqualTo(expectedZ).Within(1e-5));
         }
+
+        [Test]
+        public void Deconstruct_Vector3D_ProducesExpectedResults()
+        {
+            var v = new Vector3D(4, 3, 2);
+
+            (var x, var y, var z) = v;
+
+            Assert.That(x, Is.EqualTo(4).Within(1e-5));
+            Assert.That(y, Is.EqualTo(3).Within(1e-5));
+            Assert.That(z, Is.EqualTo(2).Within(1e-5));
+        }
     }
 }

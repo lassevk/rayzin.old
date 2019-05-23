@@ -1,0 +1,62 @@
+using System;
+
+namespace Rayzin.Core
+{
+    public struct ColorF : IEquatable<ColorF>
+    {
+        public static readonly ColorF Black = new ColorF(0, 0, 0);
+
+        public ColorF(double red, double green, double blue) => (Red, Green, Blue) = (red, green, blue);
+        public void Deconstruct(out double red, out double green, out double blue) => (red, green, blue) = (Red, Green, Blue);
+
+        public double Red { get; }
+
+        public double Green { get; }
+
+        public double Blue { get; }
+
+        public bool Equals(ColorF other) => Red.Equals(other.Red) && Green.Equals(other.Green) && Blue.Equals(other.Blue);
+
+        public override bool Equals(object obj) => obj is ColorF other && Equals(other);
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = Red.GetHashCode();
+                hashCode = (hashCode * 397) ^ Green.GetHashCode();
+                hashCode = (hashCode * 397) ^ Blue.GetHashCode();
+                return hashCode;
+            }
+        }
+
+        public static bool operator ==(ColorF left, ColorF right) => left.Equals(right);
+
+        public static bool operator !=(ColorF left, ColorF right) => !left.Equals(right);
+
+        public static ColorF operator +(ColorF c1, ColorF c2) => new ColorF(c1.Red + c2.Red, c1.Green + c2.Green, c1.Blue + c2.Blue);
+        public static ColorF operator -(ColorF c1, ColorF c2) => new ColorF(c1.Red - c2.Red, c1.Green - c2.Green, c1.Blue - c2.Blue);
+        public static ColorF operator -(ColorF c) => new ColorF(-c.Red, -c.Green, -c.Blue);
+
+        public static ColorF operator *(ColorF c, double scalar) => new ColorF(c.Red * scalar, c.Green * scalar, c.Blue * scalar);
+        public static ColorF operator *(double scalar, ColorF c) => new ColorF(c.Red * scalar, c.Green * scalar, c.Blue * scalar);
+        public static ColorF operator *(ColorF c1, ColorF c2) => new ColorF(c1.Red * c2.Red, c1.Green * c2.Green, c1.Blue * c2.Blue);
+
+        public static ColorF operator /(ColorF c, double scalar) => new ColorF(c.Red / scalar, c.Green / scalar, c.Blue / scalar);
+
+        public override string ToString() => $"ColorF ({Red}, {Green}, {Blue})";
+
+        public double Magnitude => Math.Sqrt(Red * Red + Green * Green + Blue * Blue);
+
+        public ColorF Normalize()
+        {
+            if (Math.Abs(Red) < 1e-5 && Math.Abs(Green) < 1e-5 && Math.Abs(Blue) < 1e-5)
+                return Black;
+
+            var magnitude = Magnitude;
+            return new ColorF(Red / magnitude, Green / magnitude, Blue / magnitude);
+        }
+
+        public ColorF Clamp() => new ColorF(Math.Min(Math.Max(0, Red), 1), Math.Min(Math.Max(0, Green), 1), Math.Min(Math.Max(0, Blue), 1));
+    }
+}
