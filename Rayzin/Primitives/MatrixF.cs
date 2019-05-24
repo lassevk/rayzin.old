@@ -177,5 +177,14 @@ namespace Rayzin.Primitives
         {
             return SubMatrix(row, column).Determinant();
         }
+
+        public double CoFactor(int row, int column)
+        {
+            var minor = Minor(row, column);
+            if ((row + column) % 2 != 0)
+                return -minor;
+
+            return minor;
+        }
     }
 }

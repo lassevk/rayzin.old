@@ -182,5 +182,17 @@ namespace Rayzin.Tests.Primitives
             Assert.That(determinant, Is.EqualTo(25));
             Assert.That(minor, Is.EqualTo(25));
         }
+
+        [Test]
+        public void CoFactor_Of3x3MatrixAtCoordinates_ProducesExpectedResults()
+        {
+            var a = new MatrixF(3, new double[] { 3, 5, 0, 2, -1, -7, 6, -1, 5 });
+
+            Assert.That(a.Minor(0, 0), Is.EqualTo(-12));
+            Assert.That(a.CoFactor(0, 0), Is.EqualTo(-12));
+
+            Assert.That(a.Minor(1, 0), Is.EqualTo(25));
+            Assert.That(a.CoFactor(1, 0), Is.EqualTo(-25));
+        }
     }
 }
