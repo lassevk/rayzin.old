@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rayzin.Core.Tests", "Rayzin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox", "Sandbox\Sandbox.csproj", "{3874E593-6F0E-4FF9-8C86-87EB8D17971C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rayzin.Performance", "Rayzin.Performance\Rayzin.Performance.csproj", "{DCC366EB-FC80-40B4-B6FF-E8232D5FC61A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,5 +35,9 @@ Global
 		{3874E593-6F0E-4FF9-8C86-87EB8D17971C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3874E593-6F0E-4FF9-8C86-87EB8D17971C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3874E593-6F0E-4FF9-8C86-87EB8D17971C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC366EB-FC80-40B4-B6FF-E8232D5FC61A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC366EB-FC80-40B4-B6FF-E8232D5FC61A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC366EB-FC80-40B4-B6FF-E8232D5FC61A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC366EB-FC80-40B4-B6FF-E8232D5FC61A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

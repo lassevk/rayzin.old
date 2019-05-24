@@ -22,19 +22,14 @@ namespace Rayzin.Core
 
         public double Blue { get; }
 
-        public bool Equals(ColorF other) => Red.Equals(other.Red) && Green.Equals(other.Green) && Blue.Equals(other.Blue);
+        public bool Equals(ColorF other)
+            => Epsilon.Equals(Red, other.Red) && Epsilon.Equals(Green, other.Green) && Epsilon.Equals(Blue, other.Blue);
 
         public override bool Equals(object obj) => obj is ColorF other && Equals(other);
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                int hashCode = Red.GetHashCode();
-                hashCode = (hashCode * 397) ^ Green.GetHashCode();
-                hashCode = (hashCode * 397) ^ Blue.GetHashCode();
-                return hashCode;
-            }
+            throw new NotSupportedException();
         }
 
         public static bool operator ==(ColorF left, ColorF right) => left.Equals(right);
@@ -57,7 +52,7 @@ namespace Rayzin.Core
 
         public ColorF Normalize()
         {
-            if (Math.Abs(Red) < 1e-5 && Math.Abs(Green) < 1e-5 && Math.Abs(Blue) < 1e-5)
+            if (Equals(this, Presets.Black))
                 return Presets.Black;
 
             var magnitude = Magnitude;

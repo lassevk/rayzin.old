@@ -13,9 +13,9 @@ namespace Rayzin.Core.Tests
         {
             var p = new Point3D(x, y, z);
 
-            Assert.That(p.X, Is.EqualTo(x).Within(1e-5));
-            Assert.That(p.Y, Is.EqualTo(y).Within(1e-5));
-            Assert.That(p.Z, Is.EqualTo(z).Within(1e-5));
+            Assert.That(p.X, Is.EqualTo(x).Within(Epsilon.Value));
+            Assert.That(p.Y, Is.EqualTo(y).Within(Epsilon.Value));
+            Assert.That(p.Z, Is.EqualTo(z).Within(Epsilon.Value));
         }
 
         [Test]
@@ -47,12 +47,22 @@ namespace Rayzin.Core.Tests
 
             Assert.That(output, Is.EqualTo(expected));
         }
-        
+
         [Test]
         [TestCase(4.3, -4.2, 3.1, 4.3, -4.2, 3.1, true)]
         [TestCase(4.3, -4.2, 3.1, -4.3, -4.2, 3.1, false)]
         [TestCase(4.3, -4.2, 3.1, 4.3, 4.2, 3.1, false)]
         [TestCase(4.3, -4.2, 3.1, 4.3, 4.2, -3.1, false)]
+        [TestCase(0.5, 0.6, 0.7, 0.5, 0.6, 0.7, true)]
+        [TestCase(0.5, 0.6, 0.7, 0.2, 0.6, 0.7, false)]
+        [TestCase(0.5, 0.6, 0.7, 0.5, 0.3, 0.7, false)]
+        [TestCase(0.5, 0.6, 0.7, 0.5, 0.6, 0.3, false)]
+        [TestCase(0.5, 0.6, 0.7, 0.5+Epsilon.Value/2, 0.6, 0.7, true)]
+        [TestCase(0.5, 0.6, 0.7, 0.5-Epsilon.Value/2, 0.6, 0.7, true)]
+        [TestCase(0.5, 0.6, 0.7, 0.5, 0.6+Epsilon.Value/2, 0.7, true)]
+        [TestCase(0.5, 0.6, 0.7, 0.5, 0.6-Epsilon.Value/2, 0.7, true)]
+        [TestCase(0.5, 0.6, 0.7, 0.5, 0.6, 0.7+Epsilon.Value/2, true)]
+        [TestCase(0.5, 0.6, 0.7, 0.5, 0.6, 0.7-Epsilon.Value/2, true)]
         public void EqualsOperators_WithTestCases_ProducesExpectedResults(double x1, double y1, double z1, double x2, double y2, double z2, bool expected)
         {
             var p1 = new Point3D(x1, y1, z1);
@@ -65,24 +75,6 @@ namespace Rayzin.Core.Tests
         }
  
         [Test]
-        [TestCase(4.3, -4.2, 3.1, 4.3, -4.2, 3.1, true)]
-        [TestCase(4.3, -4.2, 3.1, -4.3, -4.2, 3.1, false)]
-        [TestCase(4.3, -4.2, 3.1, 4.3, 4.2, 3.1, false)]
-        [TestCase(1, 0, 0, -1, 0, 0, false)]
-        [TestCase(1, 2, 3, 2, 3, 1, false)]
-        public void GetHashCode_WithTestCases_ProducesExpectedResults(double x1, double y1, double z1, double x2, double y2, double z2, bool expected)
-        {
-            var p1 = new Point3D(x1, y1, z1);
-            var p2 = new Point3D(x2, y2, z2);
-
-            var hashCode1 = p1.GetHashCode();
-            var hashCode2 = p2.GetHashCode();
-            bool output = hashCode1.Equals(hashCode2);
-
-            Assert.That(output, Is.EqualTo(expected));
-        }
-
-        [Test]
         public void Subtract_TwoPoints_ProducesVector()
         {
             var p1 = new Point3D(4, 3, 2);
@@ -90,9 +82,9 @@ namespace Rayzin.Core.Tests
 
             Vector3D v = p1 - p2;
 
-            Assert.That(v.X, Is.EqualTo(-2).Within(1e-5));
-            Assert.That(v.Y, Is.EqualTo(-4).Within(1e-5));
-            Assert.That(v.Z, Is.EqualTo(-6).Within(1e-5));
+            Assert.That(v.X, Is.EqualTo(-2).Within(Epsilon.Value));
+            Assert.That(v.Y, Is.EqualTo(-4).Within(Epsilon.Value));
+            Assert.That(v.Z, Is.EqualTo(-6).Within(Epsilon.Value));
         }
 
         [Test]
@@ -103,9 +95,9 @@ namespace Rayzin.Core.Tests
 
             Point3D p2 = p1 + v;
 
-            Assert.That(p2.X, Is.EqualTo(7).Within(1e-5));
-            Assert.That(p2.Y, Is.EqualTo(5).Within(1e-5));
-            Assert.That(p2.Z, Is.EqualTo(3).Within(1e-5));
+            Assert.That(p2.X, Is.EqualTo(7).Within(Epsilon.Value));
+            Assert.That(p2.Y, Is.EqualTo(5).Within(Epsilon.Value));
+            Assert.That(p2.Z, Is.EqualTo(3).Within(Epsilon.Value));
         }
 
         [Test]
@@ -115,9 +107,9 @@ namespace Rayzin.Core.Tests
 
             (var x, var y, var z) = p;
 
-            Assert.That(x, Is.EqualTo(4).Within(1e-5));
-            Assert.That(y, Is.EqualTo(3).Within(1e-5));
-            Assert.That(z, Is.EqualTo(2).Within(1e-5));
+            Assert.That(x, Is.EqualTo(4).Within(Epsilon.Value));
+            Assert.That(y, Is.EqualTo(3).Within(Epsilon.Value));
+            Assert.That(z, Is.EqualTo(2).Within(Epsilon.Value));
         }
     }
 }

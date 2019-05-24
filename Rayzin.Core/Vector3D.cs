@@ -21,19 +21,13 @@ namespace Rayzin.Core
 
         public double W => 0;
 
-        public bool Equals(Vector3D other) => X.Equals(other.X) && Y.Equals(other.Y) && Z.Equals(other.Z);
+        public bool Equals(Vector3D other) => Epsilon.Equals(X, other.X) && Epsilon.Equals(Y, other.Y) && Epsilon.Equals(Z, other.Z);
 
         public override bool Equals(object obj) => obj is Vector3D other && Equals(other);
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                int hashCode = X.GetHashCode();
-                hashCode = (hashCode * 397) ^ Y.GetHashCode();
-                hashCode = (hashCode * 397) ^ Z.GetHashCode();
-                return hashCode;
-            }
+            throw new NotSupportedException();
         }
 
         public static bool operator ==(Vector3D left, Vector3D right) => left.Equals(right);
@@ -56,6 +50,9 @@ namespace Rayzin.Core
         public Vector3D Normalize()
         {
             var magnitude = Magnitude;
+            if (Epsilon.Equals(magnitude, 1))
+                return this;
+            
             return new Vector3D(X / magnitude, Y / magnitude, Z / magnitude);
         }
 
