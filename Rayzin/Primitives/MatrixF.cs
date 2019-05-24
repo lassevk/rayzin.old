@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 
 using JetBrains.Annotations;
@@ -113,6 +114,15 @@ namespace Rayzin.Primitives
             }
 
             return new TupleF(result);
+        }
+
+        public static MatrixF Identity(int size)
+        {
+            var values = new double[size * size];
+            for (int index = 0; index < size; index++)
+                values[index * size + index] = 1;
+
+            return new MatrixF(size, values);
         }
     }
 }

@@ -67,5 +67,7 @@ namespace Rayzin.Primitives
         public static bool operator ==(TupleF left, TupleF right) => left.Equals(right);
 
         public static bool operator !=(TupleF left, TupleF right) => !left.Equals(right);
+
+        public override string ToString() => $"({string.Join(", ", _Values)})";
     }
 }

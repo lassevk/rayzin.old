@@ -109,5 +109,25 @@ namespace Rayzin.Tests.Primitives
 
             Assert.That(actual, Is.EqualTo(new TupleF(18, 24, 33, 1)));
         }
+
+        [Test]
+        public void Multiply_MatrixByIdentityMatrix_ProducesOriginalMatrix()
+        {
+            var m = new MatrixF(4, new double[] { 0, 1, 2, 4, 1, 2, 4, 8, 2, 4, 8, 16, 4, 8, 16, 32 });
+
+            var actual = m * MatrixF.Identity(4);
+
+            Assert.That(actual, Is.EqualTo(m));
+        }
+
+        [Test]
+        public void Multiply_IdentityMatrixByTuple_ProducesOriginalTuple()
+        {
+            var t = new TupleF(1, 2, 3, 4);
+
+            var actual = MatrixF.Identity(4) * t;
+
+            Assert.That(actual, Is.EqualTo(t));
+        }
     }
 }
