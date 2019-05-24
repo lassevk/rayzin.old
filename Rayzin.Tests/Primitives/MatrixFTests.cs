@@ -86,5 +86,28 @@ namespace Rayzin.Tests.Primitives
 
             Assert.That(output, Is.True);
         }
+
+        [Test]
+        public void Multiply_Two4x4Matrices_ProducesExpectedResults()
+        {
+            var m1 = new MatrixF(4, new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2 });
+            var m2 = new MatrixF(4, new double[] { -2, 1, 2, 3, 3, 2, 1, -1, 4, 3, 6, 5, 1, 2, 7, 8 });
+
+            var actual = m1 * m2;
+
+            var expected = new MatrixF(4, new double[] { 20, 22, 50, 48, 44, 54, 114, 108, 40, 58, 110, 102, 16, 26, 46, 42 });
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void Multiply_4x4MatrixWith4ElementTuple_ProducesExpectedResults()
+        {
+            var m = new MatrixF(4, new double[] { 1, 2, 3, 4, 2, 4, 4, 2, 8, 6, 4, 1, 0, 0, 0, 1 });
+            var t = new TupleF(1, 2, 3, 1);
+
+            var actual = m * t;
+
+            Assert.That(actual, Is.EqualTo(new TupleF(18, 24, 33, 1)));
+        }
     }
 }
