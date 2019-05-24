@@ -2,7 +2,7 @@
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             new Point3DTests().Run();
             new Vector3DTests().Run();

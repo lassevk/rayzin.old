@@ -1,8 +1,9 @@
 using System;
 using System.Linq;
-using System.Text;
 
 using NUnit.Framework;
+
+// ReSharper disable ObjectCreationAsStatement
 
 namespace Rayzin.Core.Tests
 {

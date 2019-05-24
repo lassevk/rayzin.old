@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 
 namespace Rayzin.Core
 {
-    public unsafe struct MatrixF
+    public struct MatrixF : IEquatable<MatrixF>
     {
         [NotNull]
         private readonly double[] _Values;
@@ -28,7 +28,7 @@ namespace Rayzin.Core
 
         public int Size { get; }
 
-        public unsafe double this[int x, int y]
+        public double this[int x, int y]
         {
             get => _Values[x * Size + y];
             set => _Values[x * Size + y] = value;
@@ -55,5 +55,25 @@ namespace Rayzin.Core
 
             return result.ToString();
         }
+
+        public bool Equals(MatrixF other)
+        {
+            if (Size != other.Size)
+                return false;
+
+            for (int index = 0; index < Size*Size; index++)
+                if (!Epsilon.Equals(_Values[index], other._Values[index]))
+                    return false;
+
+            return true;
+        }
+
+        public override bool Equals(object obj) => obj is MatrixF other && Equals(other);
+
+        public override int GetHashCode() => throw new NotSupportedException();
+
+        public static bool operator ==(MatrixF left, MatrixF right) => left.Equals(right);
+
+        public static bool operator !=(MatrixF left, MatrixF right) => !left.Equals(right);
     }
 }

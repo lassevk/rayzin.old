@@ -1,7 +1,6 @@
-using System;
-using System.Drawing;
-
 using Rayzin.Core;
+
+// ReSharper disable ObjectCreationAsStatement
 
 namespace Rayzin.Performance
 {
@@ -35,9 +34,7 @@ namespace Rayzin.Performance
         private void Constructor()
         {
             for (int index = 0; index < 100000; index++)
-            {
-                Point3D p = new Point3D(1, 1, 1);
-            }
+                new Point3D(1, 1, 1);
         }
     }
 }

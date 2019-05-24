@@ -1,12 +1,10 @@
-﻿using System;
-
-using Rayzin.Core;
+﻿using Rayzin.Core;
 
 namespace Sandbox
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var canvas = new CanvasF(900, 550);
             var env = new Environment(new Vector3D(0, -0.1, 0), new Vector3D(-0.01, 0, 0));
