@@ -149,5 +149,38 @@ namespace Rayzin.Tests.Primitives
 
             Assert.That(actual, Is.EqualTo(m));
         }
+
+        [Test]
+        public void Determinant_2x2Matrix_ProducesExpectedResult()
+        {
+            var m = new MatrixF(2, new double[] { 1, 5, -3, 2 });
+
+            var actual = m.Determinant();
+
+            Assert.That(actual, Is.EqualTo(17));
+        }
+
+        [Test]
+        public void SubMatrix_Of3x3Matrix_ProducesExpectedResult()
+        {
+            var m = new MatrixF(3, new double[] { 1, 5, 0, -3, 2, 7, 0, 6, -3 });
+
+            var actual = m.SubMatrix(0, 2);
+
+            Assert.That(actual, Is.EqualTo(new MatrixF(2, new double[] { -3, 2, 0, 6 })));
+        }
+
+        [Test]
+        public void Minor_Of3x3MatrixAtCoordinates_ProducesExpectedResults()
+        {
+            var a = new MatrixF(3, new double[] { 3, 5, 0, 2, -1, -7, 6, -1, 5 });
+            var b = a.SubMatrix(1, 0);
+
+            var determinant = b.Determinant();
+            var minor = a.Minor(1, 0);
+
+            Assert.That(determinant, Is.EqualTo(25));
+            Assert.That(minor, Is.EqualTo(25));
+        }
     }
 }

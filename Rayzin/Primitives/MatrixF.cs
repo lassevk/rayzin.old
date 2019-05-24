@@ -134,5 +134,48 @@ namespace Rayzin.Primitives
 
             return new MatrixF(Size, values);
         }
+
+        public double Determinant()
+        {
+            switch (Size)
+            {
+                case 2:
+                    return _Values[0] * _Values[3] - _Values[1] * _Values[2];
+                
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        public MatrixF SubMatrix(int row, int column)
+        {
+            int newSize = Size - 1;
+            double[] values = new double[newSize * newSize];
+            int y2 = 0;
+            for (int y1 = 0; y1 < Size; y1++)
+            {
+                if (y1 == column)
+                    continue;
+
+                int x2 = 0;
+                for (int x1 = 0; x1 < Size; x1++)
+                {
+                    if (x1 == row)
+                        continue;
+
+                    values[x2 * newSize + y2] = _Values[x1 * Size + y1];
+                    x2++;
+                }
+
+                y2++;
+            }
+
+            return new MatrixF(newSize, values);
+        }
+
+        public double Minor(int row, int column)
+        {
+            return SubMatrix(row, column).Determinant();
+        }
     }
 }
