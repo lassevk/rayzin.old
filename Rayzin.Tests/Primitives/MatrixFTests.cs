@@ -194,5 +194,59 @@ namespace Rayzin.Tests.Primitives
             Assert.That(a.Minor(1, 0), Is.EqualTo(25));
             Assert.That(a.CoFactor(1, 0), Is.EqualTo(-25));
         }
+
+        [Test]
+        [TestCase(0, 0, 56)]
+        [TestCase(0, 1, 12)]
+        [TestCase(0, 2, -46)]
+        public void Determinant_Of3x3_WithTestCases(int row, int column, double expected)
+        {
+            var m = new MatrixF(3, new double[] { 1, 2, 6, -5, 8, -4, 2, 6, 4 });
+
+            var actual = m.Determinant();
+            
+            Assert.That(actual, Is.EqualTo(-196));
+        }
+
+        [Test]
+        [TestCase(0, 0, 56)]
+        [TestCase(0, 1, 12)]
+        [TestCase(0, 2, -46)]
+        public void CoFactor_Of3x3_WithTestCases(int row, int column, double expected)
+        {
+            var m = new MatrixF(3, new double[] { 1, 2, 6, -5, 8, -4, 2, 6, 4 });
+
+            var actual = m.CoFactor(row, column);
+
+            Assert.That(actual, Is.EqualTo(expected).Within(Epsilon.Value));
+        }
+        
+        [Test]
+        [TestCase(0, 0, 690)]
+        [TestCase(0, 1, 447)]
+        [TestCase(0, 2, 210)]
+        [TestCase(0, 3, 51)]
+        public void Determinant_Of4x4_WithTestCases(int row, int column, double expected)
+        {
+            var m = new MatrixF(4, new double[] { -2, -8, 3, 5, -3, 1, 7, 3, 1, 2, -9, 6, -6, 7, 7, -9 });
+
+            var actual = m.Determinant();
+            
+            Assert.That(actual, Is.EqualTo(-4071));
+        }
+
+        [Test]
+        [TestCase(0, 0, 690)]
+        [TestCase(0, 1, 447)]
+        [TestCase(0, 2, 210)]
+        [TestCase(0, 3, 51)]
+        public void CoFactor_Of4x4_WithTestCases(int row, int column, double expected)
+        {
+            var m = new MatrixF(4, new double[] { -2, -8, 3, 5, -3, 1, 7, 3, 1, 2, -9, 6, -6, 7, 7, -9 });
+
+            var actual = m.CoFactor(row, column);
+            
+            Assert.That(actual, Is.EqualTo(expected).Within(Epsilon.Value));
+        }
     }
 }

@@ -137,14 +137,14 @@ namespace Rayzin.Primitives
 
         public double Determinant()
         {
-            switch (Size)
-            {
-                case 2:
-                    return _Values[0] * _Values[3] - _Values[1] * _Values[2];
-                
-                default:
-                    throw new NotImplementedException();
-            }
+            if (Size == 2)
+                return _Values[0] * _Values[3] - _Values[1] * _Values[2];
+
+            double sum = 0;
+            for (int x = 0; x < 4; x++)
+                sum += CoFactor(x, 0) * _Values[x];
+
+            return sum;
         }
 
         public MatrixF SubMatrix(int row, int column)
@@ -163,7 +163,20 @@ namespace Rayzin.Primitives
                     if (x1 == row)
                         continue;
 
-                    values[x2 * newSize + y2] = _Values[x1 * Size + y1];
+                    Console.WriteLine($"{x1}, {y1}, {x1 * Size + y1}");
+                    if (x1 * Size + y1 < 0 || x1 * Size + y1 >= _Values.Length)
+                    {
+                        Console.WriteLine("Here");
+                    }
+
+                    double value = _Values[x1 * Size + y1];
+
+                    if (x2 * newSize + y2 < 0 || x2 * newSize + y2 >= values.Length)
+                    {
+                        Console.WriteLine("Here");
+                    }
+
+                    values[x2 * newSize + y2] = value;
                     x2++;
                 }
 
