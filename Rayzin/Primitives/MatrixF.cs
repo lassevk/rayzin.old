@@ -124,5 +124,15 @@ namespace Rayzin.Primitives
 
             return new MatrixF(size, values);
         }
+
+        public MatrixF Transpose()
+        {
+            var values = new double[Size * Size];
+            for (int x = 0; x < Size; x++)
+                for (int y = 0; y < Size; y++)
+                    values[x * Size + y] = _Values[y * Size + x];
+
+            return new MatrixF(Size, values);
+        }
     }
 }

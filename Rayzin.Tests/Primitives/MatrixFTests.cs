@@ -129,5 +129,25 @@ namespace Rayzin.Tests.Primitives
 
             Assert.That(actual, Is.EqualTo(t));
         }
+
+        [Test]
+        public void Transpose_ExampleMatrix_ProducesExpectedResults()
+        {
+            var m = new MatrixF(4, new double[] { 0, 9, 3, 0, 9, 8, 0, 8, 1, 8, 5, 3, 0, 0, 5, 8 });
+
+            var actual = m.Transpose();
+
+            Assert.That(actual, Is.EqualTo(new MatrixF(4, new double[] { 0, 9, 1, 0, 9, 8, 8, 0, 3, 0, 5, 5, 0, 8, 3, 8 })));
+        }
+
+        [Test]
+        public void Transpose_IdentityMatrix_ProducesExpectedResults()
+        {
+            var m = MatrixF.Identity(4);
+
+            var actual = m.Transpose();
+
+            Assert.That(actual, Is.EqualTo(m));
+        }
     }
 }
