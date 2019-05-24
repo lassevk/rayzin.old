@@ -1,6 +1,8 @@
-using Rayzin.Core;
+
 
 // ReSharper disable ObjectCreationAsStatement
+
+using Rayzin.Primitives;
 
 namespace Rayzin.Performance
 {

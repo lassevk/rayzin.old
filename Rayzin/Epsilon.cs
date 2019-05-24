@@ -1,6 +1,6 @@
 using System;
 
-namespace Rayzin.Core
+namespace Rayzin
 {
     public struct Epsilon
     {

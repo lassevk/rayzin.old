@@ -4,7 +4,9 @@ using System.Text;
 
 using JetBrains.Annotations;
 
-namespace Rayzin.Core
+using Rayzin.Primitives;
+
+namespace Rayzin
 {
     public class CanvasF
     {

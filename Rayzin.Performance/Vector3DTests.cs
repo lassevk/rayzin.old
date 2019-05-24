@@ -1,6 +1,6 @@
 using System;
 
-using Rayzin.Core;
+using Rayzin.Primitives;
 
 namespace Rayzin.Performance
 {

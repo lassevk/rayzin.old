@@ -1,6 +1,6 @@
 using System;
 
-namespace Rayzin.Core
+namespace Rayzin.Primitives
 {
     public struct Vector3D : IEquatable<Vector3D>
     {

@@ -1,7 +1,10 @@
 using NUnit.Framework;
+
+using Rayzin.Primitives;
+
 // ReSharper disable PossibleNullReferenceException
 
-namespace Rayzin.Core.Tests
+namespace Rayzin.Tests.Primitives
 {
     [TestFixture]
     public class Vector3DTests

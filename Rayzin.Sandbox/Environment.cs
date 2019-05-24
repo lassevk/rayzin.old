@@ -1,6 +1,6 @@
-using Rayzin.Core;
+using Rayzin.Primitives;
 
-namespace Sandbox
+namespace Rayzin.Sandbox
 {
     public struct Environment
     {

@@ -3,7 +3,7 @@ using System.Text;
 
 using JetBrains.Annotations;
 
-namespace Rayzin.Core
+namespace Rayzin.Primitives
 {
     public struct MatrixF : IEquatable<MatrixF>
     {

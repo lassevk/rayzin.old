@@ -3,9 +3,11 @@ using System.Linq;
 
 using NUnit.Framework;
 
+using Rayzin.Primitives;
+
 // ReSharper disable ObjectCreationAsStatement
 
-namespace Rayzin.Core.Tests
+namespace Rayzin.Tests
 {
     [TestFixture]
     public class CanvasFTests

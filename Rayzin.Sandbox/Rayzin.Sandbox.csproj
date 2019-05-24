@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Rayzin.Core\Rayzin.Core.csproj" />
+      <ProjectReference Include="..\Rayzin\Rayzin.csproj" />
     </ItemGroup>
 
 </Project>

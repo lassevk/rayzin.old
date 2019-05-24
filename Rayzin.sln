@@ -9,11 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rayzin.Core", "Rayzin.Core\Rayzin.Core.csproj", "{48FB3C63-444B-4BE1-958D-7585FC8313C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rayzin", "Rayzin\Rayzin.csproj", "{48FB3C63-444B-4BE1-958D-7585FC8313C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rayzin.Core.Tests", "Rayzin.Core.Tests\Rayzin.Core.Tests.csproj", "{EF47515F-AF63-4624-AE94-579A9597B799}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rayzin.Tests", "Rayzin.Tests\Rayzin.Tests.csproj", "{EF47515F-AF63-4624-AE94-579A9597B799}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox", "Sandbox\Sandbox.csproj", "{3874E593-6F0E-4FF9-8C86-87EB8D17971C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rayzin.Sandbox", "Rayzin.Sandbox\Rayzin.Sandbox.csproj", "{3874E593-6F0E-4FF9-8C86-87EB8D17971C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rayzin.Performance", "Rayzin.Performance\Rayzin.Performance.csproj", "{DCC366EB-FC80-40B4-B6FF-E8232D5FC61A}"
 EndProject
