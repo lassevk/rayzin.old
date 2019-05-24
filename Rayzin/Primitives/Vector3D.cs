@@ -19,16 +19,22 @@ namespace Rayzin.Primitives
         public double Y { get; }
         public double Z { get; }
 
-        public double W => 0;
+        public static implicit operator Tuple4(Vector3D v) => new Tuple4(v.X, v.Y, v.Z, 0);
 
-        public bool Equals(Vector3D other) => Epsilon.Equals(X, other.X) && Epsilon.Equals(Y, other.Y) && Epsilon.Equals(Z, other.Z);
+        public static explicit operator Vector3D(Tuple4 t)
+        {
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            if (t.T3 != 0)
+                throw new InvalidOperationException("Only 4-tuples with T3=0 can be converted to vectors");
+
+            return new Vector3D(t.T0, t.T1, t.T2);
+        }
+
+        public bool Equals(Vector3D other) => (Tuple4)this == other;
 
         public override bool Equals(object obj) => obj is Vector3D other && Equals(other);
 
-        public override int GetHashCode()
-        {
-            throw new NotSupportedException();
-        }
+        public override int GetHashCode() => throw new NotSupportedException();
 
         public static bool operator ==(Vector3D left, Vector3D right) => left.Equals(right);
 
@@ -36,16 +42,16 @@ namespace Rayzin.Primitives
         
         public override string ToString() => $"Vector3D ({X}, {Y}, {Z})";
 
-        public static Vector3D operator +(Vector3D v1, Vector3D v2) => new Vector3D(v1.X + v2.X, v1.Y + v2.Y, v1.Z + v2.Z);
-        public static Vector3D operator -(Vector3D v1, Vector3D v2) => new Vector3D(v1.X - v2.X, v1.Y - v2.Y, v1.Z - v2.Z);
-        public static Vector3D operator -(Vector3D v) => new Vector3D(-v.X, -v.Y, -v.Z);
+        public static Vector3D operator +(Vector3D v1, Vector3D v2) => (Vector3D)((Tuple4)v1 + v2);
+        public static Vector3D operator -(Vector3D v1, Vector3D v2) => (Vector3D)((Tuple4)v1 - v2);
+        public static Vector3D operator -(Vector3D v) => (Vector3D)(-(Tuple4)v);
 
-        public static Vector3D operator *(Vector3D v, double scalar) => new Vector3D(v.X * scalar, v.Y * scalar, v.Z * scalar);
-        public static Vector3D operator *(double scalar, Vector3D v) => new Vector3D(v.X * scalar, v.Y * scalar, v.Z * scalar);
+        public static Vector3D operator *(Vector3D v, double scalar) => (Vector3D)((Tuple4)v * scalar);
+        public static Vector3D operator *(double scalar, Vector3D v) => (Vector3D)((Tuple4)v * scalar);
         
-        public static Vector3D operator /(Vector3D v, double scalar) => new Vector3D(v.X / scalar, v.Y / scalar, v.Z / scalar);
+        public static Vector3D operator /(Vector3D v, double scalar) => (Vector3D)((Tuple4)v / scalar);
 
-        public double Magnitude => Math.Sqrt(X * X + Y * Y + Z * Z);
+        public double Magnitude => (Tuple4)this * this;
 
         public Vector3D Normalize()
         {
