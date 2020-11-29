@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Drawing;
+
+using NUnit.Framework;
 
 using Rayzin.Primitives;
 
@@ -64,6 +66,15 @@ namespace Rayzin.Tests.Primitives
             var v = new Vector3D(-4, 6, 8);
             Vector3D output = inv * v;
             Assert.That(output, Is.EqualTo(new Vector3D(-2, 2, 2)));
+        }
+
+        [Test]
+        public void ScaleReflection_ReturnsExpectedResults()
+        {
+            MatrixF transform = Transforms.Scaling(-1, 1, 1);
+            var p = new Point3D(2, 3, 4);
+            Point3D output = transform * p;
+            Assert.That(output, Is.EqualTo(new Point3D(-2, 3, 4)));
         }
     }
 }
