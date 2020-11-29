@@ -1,4 +1,8 @@
-﻿namespace Rayzin.Primitives
+﻿using System;
+
+using Rayzin.Objects;
+
+namespace Rayzin.Primitives
 {
     public readonly struct RayF
     {
@@ -9,5 +13,7 @@
         public Vector3D Direction { get; }
 
         public Point3D Position(double t) => Origin + Direction * t;
+
+        public Intersections Intersect(Object3D obj) => obj.Intersect(this);
     }
 }
