@@ -37,5 +37,33 @@ namespace Rayzin.Tests.Primitives
             Vector3D output = transform * v;
             Assert.That(output, Is.EqualTo(v));
         }
+
+        [Test]
+        public void ScalePoint_ReturnsExpectedResults()
+        {
+            MatrixF transform = Transforms.Scaling(2, 3, 4);
+            var p = new Point3D(-4, 6, 8);
+            Point3D output = transform * p;
+            Assert.That(output, Is.EqualTo(new Point3D(-8, 18, 32)));
+        }
+
+        [Test]
+        public void ScaleVector_ReturnsExpectedResults()
+        {
+            MatrixF transform = Transforms.Scaling(2, 3, 4);
+            var v = new Vector3D(-4, 6, 8);
+            Vector3D output = transform * v;
+            Assert.That(output, Is.EqualTo(new Vector3D(-8, 18, 32)));
+        }
+
+        [Test]
+        public void ScaleByInverse_ReturnsExpectedResults()
+        {
+            MatrixF transform = Transforms.Scaling(2, 3, 4);
+            MatrixF inv = transform.Inverse();
+            var v = new Vector3D(-4, 6, 8);
+            Vector3D output = inv * v;
+            Assert.That(output, Is.EqualTo(new Vector3D(-2, 2, 2)));
+        }
     }
 }
