@@ -1,4 +1,6 @@
 using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 
@@ -100,6 +102,16 @@ namespace Rayzin
             appendLine();
 
             return result.ToString();
+        }
+
+        public Bitmap ToBitmap()
+        {
+            var bitmap = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
+            for (var y = 0; y < Height; y++)
+                for (var x = 0; x < Width; x++)
+                    bitmap.SetPixel(x, y, this[x, y].ToColor());
+
+            return bitmap;
         }
 
         public void SaveToPpm([NotNull] string filename)
