@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 using NUnit.Framework;
 
 using Rayzin.Primitives;
@@ -211,6 +213,48 @@ namespace Rayzin.Tests.Primitives
 
             Assert.That(a.Minor(1, 0), Is.EqualTo(25));
             Assert.That(a.CoFactor(1, 0), Is.EqualTo(-25));
+        }
+
+        [Test]
+        public void MatrixIsInvertible()
+        {
+            var a = new MatrixF(4, new double[] { 6, 4, 4, 4, 5, 5, 7, 6, 4, -9, 3, -7, 9, 1, 7, -6 });
+
+            Assert.That(a.Determinant(), Is.EqualTo(-2120));
+            Assert.That(a.IsInvertible(), Is.True);
+        }
+
+        [Test]
+        public void MatrixIsNotInvertible()
+        {
+            var a = new MatrixF(4, new double[] { -4, 2, -2, -3, 9, 6, 2, 6, 0, -5, 1, -5, 0, 0, 0, 0 });
+
+            Assert.That(a.Determinant(), Is.EqualTo(0));
+            Assert.That(a.IsInvertible(), Is.False);
+        }
+
+        [Test]
+        public void Invert_Of3x3Matrix_ProducesExpectedResults()
+        {
+            var a = new MatrixF(4, new double[] { -5, 2, 6, -8, 1, -5, 1, 8, 7, 7, -6, -7, 1, -3, 7, 4 });
+
+            MatrixF b = a.Inverse();
+
+            Assert.That(a.Determinant(), Is.EqualTo(532));
+            Assert.That(a.CoFactor(2, 3), Is.EqualTo(-160));
+            Assert.That(b[3, 2], Is.EqualTo(-160.0 / 532.0).Within(Epsilon.Value));
+            Assert.That(a.CoFactor(3, 2), Is.EqualTo(105));
+            Assert.That(b[2, 3], Is.EqualTo(105.0 / 532.0).Within(Epsilon.Value));
+            Assert.That(
+                b,
+                Is.EqualTo(
+                    new MatrixF(
+                        4,
+                        new double[]
+                        {
+                            0.21805, 0.45113, 0.24060, -0.04511, -0.80827, -1.45677, -0.44361, 0.52068, -0.07895, -0.22368, -0.05263,
+                            0.19737, -0.52256, -0.81391, -0.30075, 0.30639
+                        })));
         }
     }
 }

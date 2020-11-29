@@ -29,10 +29,10 @@ namespace Rayzin.Primitives
 
         public int Size { get; }
 
-        public double this[int x, int y]
+        public double this[int column, int row]
         {
-            get => _Values[x * Size + y];
-            set => _Values[x * Size + y] = value;
+            get => _Values[column * Size + row];
+            set => _Values[column * Size + row] = value;
         }
 
         public override string ToString()
@@ -189,6 +189,35 @@ namespace Rayzin.Primitives
                 return -minor;
 
             return minor;
+        }
+
+        public MatrixF CoFactors()
+        {
+            var cofactors = new double[Size * Size];
+            for (var row = 0; row < Size; row++)
+                for (var column = 0; column < Size; column++)
+                    cofactors[row * Size + column] = CoFactor(row, column);
+
+            return new MatrixF(Size, cofactors);
+        }
+
+        public bool IsInvertible()
+        {
+            return Determinant() != 0;
+        }
+
+        public MatrixF Inverse()
+        {
+            MatrixF cofactors = CoFactors();
+            MatrixF transposedCofactors = cofactors.Transpose();
+            var determinant = Determinant();
+
+            var inverse = new MatrixF(Size, new double[Size * Size]);
+            for (var row = 0; row < Size; row++)
+                for (var column = 0; column < Size; column++)
+                    inverse[column, row] = transposedCofactors[column, row] / determinant;
+
+            return inverse;
         }
     }
 }
