@@ -11,7 +11,7 @@ namespace Rayzin.Primitives
         [NotNull]
         private readonly double[] _Values;
 
-        public MatrixF(int size, [NotNull] double[] values)
+        public MatrixF(int size, [NotNull] params double[] values)
         {
             if (values == null)
                 throw new ArgumentNullException(nameof(values));
@@ -208,9 +208,12 @@ namespace Rayzin.Primitives
 
         public MatrixF Inverse()
         {
+            var determinant = Determinant();
+            if (determinant == 0)
+                throw new InvalidOperationException("Matrix is not invertible, has a zero determinant");
+
             MatrixF cofactors = CoFactors();
             MatrixF transposedCofactors = cofactors.Transpose();
-            var determinant = Determinant();
 
             var inverse = new MatrixF(Size, new double[Size * Size]);
             for (var row = 0; row < Size; row++)
