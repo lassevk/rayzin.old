@@ -2,8 +2,10 @@
 
 using NUnit.Framework;
 
+using Rayzin.Materials;
 using Rayzin.Objects.Renderables;
 using Rayzin.Primitives;
+using Rayzin.Tests.Materials;
 
 namespace Rayzin.Tests.Objects
 {
@@ -129,6 +131,24 @@ namespace Rayzin.Tests.Objects
             RzVector n = s.NormalAt((0, Math.Sqrt(2) / 2, -Math.Sqrt(2) / 2));
             RzVector expected = (0, 0.97014, -0.24254);
             Assert.That(n, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void NewSphereHasDefaultMaterial()
+        {
+            var s = new RzSphere();
+            Assert.That(s.Material, Is.EqualTo(new RzPhongMaterial()));
+        }
+
+        [Test]
+        public void ASphereMayBeAssignedAMaterial()
+        {
+            var s = new RzSphere();
+            var m = new RzPhongMaterial();
+            m.Ambient = 1.0;
+            s.Material = m;
+
+            Assert.That(s.Material, Is.EqualTo(m));
         }
     }
 }

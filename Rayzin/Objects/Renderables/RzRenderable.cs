@@ -1,4 +1,5 @@
-﻿using Rayzin.Primitives;
+﻿using Rayzin.Materials;
+using Rayzin.Primitives;
 
 namespace Rayzin.Objects.Renderables
 {
@@ -16,5 +17,7 @@ namespace Rayzin.Objects.Renderables
         }
 
         public RzMatrix InverseTransformation => _InverseTransformation;
+
+        public RzMaterial Material { get; set; } = new RzPhongMaterial();
     }
 }
