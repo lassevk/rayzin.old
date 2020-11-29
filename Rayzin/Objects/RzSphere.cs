@@ -28,6 +28,12 @@ namespace Rayzin.Objects
             return new RzIntersectionsCollection(new RzIntersection(this, t1), new RzIntersection(this, t2));
         }
 
-        public RzVector NormalAt(RzPoint surfacePoint) => new RzVector(surfacePoint.X, surfacePoint.Y, surfacePoint.Z).Normalize();
+        public RzVector NormalAt(RzPoint worldPoint)
+        {
+            RzPoint objectPoint = InverseTransformation * worldPoint;
+            RzVector objectNormal = new RzVector(objectPoint.X, objectPoint.Y, objectPoint.Z).Normalize();
+            RzVector worldNormal = InverseTransformation.Transpose() * objectNormal;
+            return worldNormal.Normalize();
+        }
     }
 }

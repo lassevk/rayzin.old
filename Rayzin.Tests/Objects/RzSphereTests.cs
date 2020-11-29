@@ -112,5 +112,23 @@ namespace Rayzin.Tests.Objects
 
             Assert.That(n, Is.EqualTo(expected));
         }
+
+        [Test]
+        public void ComputingTheNormalOnATranslatedSphere()
+        {
+            var s = new RzSphere { Transformation = RzTransforms.Translation(0, 1, 0) };
+            RzVector n = s.NormalAt((0, 1.70711, -0.70711));
+            RzVector expected = (0, 0.70711, -0.70711);
+            Assert.That(n, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void ComputingTheNormalOnATransformedSphere()
+        {
+            var s = new RzSphere { Transformation = RzTransforms.Scaling(1, 0.5, 1) * RzTransforms.RotationZ(Math.PI / 5) };
+            RzVector n = s.NormalAt((0, Math.Sqrt(2) / 2, -Math.Sqrt(2) / 2));
+            RzVector expected = (0, 0.97014, -0.24254);
+            Assert.That(n, Is.EqualTo(expected));
+        }
     }
 }
