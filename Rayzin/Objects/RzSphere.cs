@@ -27,5 +27,7 @@ namespace Rayzin.Objects
 
             return new RzIntersectionsCollection(new RzIntersection(this, t1), new RzIntersection(this, t2));
         }
+
+        public RzVector NormalAt(RzPoint surfacePoint) => new RzVector(surfacePoint.X, surfacePoint.Y, surfacePoint.Z).Normalize();
     }
 }

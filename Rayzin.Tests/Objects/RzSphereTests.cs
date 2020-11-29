@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System;
+
+using NUnit.Framework;
 
 using Rayzin.Objects;
 using Rayzin.Primitives;
@@ -93,6 +95,22 @@ namespace Rayzin.Tests.Objects
             var s = new RzSphere { Transformation = RzTransforms.Translation(5, 0, 0) };
             RzIntersectionsCollection xs = r.Intersect(s);
             CollectionAssert.IsEmpty(xs);
+        }
+
+        [Test]
+        [TestCase(1, 0, 0, 1, 0, 0, TestName = "On X axis")]
+        [TestCase(0, 1, 0, 0, 1, 0, TestName = "On Y axis")]
+        [TestCase(0, 0, 1, 0, 0, 1, TestName = "On Z axis")]
+        [TestCase(0.577350269189627D, 0.577350269189627D, 0.577350269189627D, 0.577350269189627D, 0.577350269189627D, 0.577350269189627D, TestName = "On nonaxial point")]
+        [TestCase(2, 2, 2, 0.577350269189625D, 0.577350269189625D, 0.577350269189625D, TestName = "Normal vector is always normalized")]
+        public void NormalOnASphere_WithTestCases_ProducesExpectedResults(double x, double y, double z, double expectedX, double expectedY, double expectedZ)
+        {
+            var s = new RzSphere();
+            RzVector n = s.NormalAt((x, y, z));
+            
+            RzVector expected = (expectedX, expectedY, expectedZ);
+
+            Assert.That(n, Is.EqualTo(expected));
         }
     }
 }
