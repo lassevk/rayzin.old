@@ -4,7 +4,7 @@ using Rayzin.Primitives;
 
 namespace Rayzin.Performance
 {
-    internal class Vector3DTests
+    internal class RzVectorTests
     {
         public void Run()
         {

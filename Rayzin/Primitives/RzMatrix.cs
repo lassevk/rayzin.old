@@ -99,7 +99,7 @@ namespace Rayzin.Primitives
         }
 
         public static RzPoint operator *(RzMatrix m, RzPoint p) => (RzPoint)(m * (RzTuple)p);
-        public static RzVector operator *(RzMatrix m, RzVector v) => (RzVector)(m * (RzTuple)v);
+        public static RzVector operator *(RzMatrix m, RzVector v) => (m * (RzTuple)v).ForceVector();
         public static RzTuple operator *(RzMatrix m, RzTuple t)
         {
             if (m.Size != t.Length)

@@ -69,5 +69,14 @@ namespace Rayzin.Primitives
         public static bool operator !=(RzTuple left, RzTuple right) => !left.Equals(right);
 
         public override string ToString() => $"({string.Join(", ", _Values)})";
+
+        internal RzVector ForceVector()
+        {
+            if (Length != 4)
+                throw new InvalidOperationException();
+
+            return new RzVector(_Values[0], _Values[1], _Values[2]);
+
+        }
     }
 }

@@ -1,3 +1,5 @@
+using System;
+
 using NUnit.Framework;
 
 using Rayzin.Primitives;
@@ -218,7 +220,7 @@ namespace Rayzin.Tests.Primitives
         }
 
         [Test]
-        public void Deconstruct_Vector3D_ProducesExpectedResults()
+        public void Deconstruct_RzVector_ProducesExpectedResults()
         {
             var v = new RzVector(4, 3, 2);
 
@@ -227,6 +229,20 @@ namespace Rayzin.Tests.Primitives
             Assert.That(x, Is.EqualTo(4).Within(RzEpsilon.Value));
             Assert.That(y, Is.EqualTo(3).Within(RzEpsilon.Value));
             Assert.That(z, Is.EqualTo(2).Within(RzEpsilon.Value));
+        }
+
+        [Test]
+        [TestCase(1, -1, 0, 0, 1, 0, 1, 1, 0, TestName = "Vector approaching at 45 degrees")]
+        [TestCase(0, -1, 0, 0.70710678118655D, 0.70710678118655D, 0, 1, 0, 0)]
+        public void Reflect_WithTestCases_ProducesExpectedResults(double vectorX, double vectorY, double vectorZ, double normalX, double normalY, double normalZ, double expectedX, double expectedY, double expectedZ)
+        {
+            RzVector vector = (vectorX, vectorY, vectorZ);
+            RzVector normal = (normalX, normalY, normalZ);
+
+            RzVector reflected = vector.Reflect(normal);
+
+            RzVector expected = (expectedX, expectedY, expectedZ);
+            Assert.That(reflected, Is.EqualTo(expected));
         }
     }
 }

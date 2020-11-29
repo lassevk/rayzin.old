@@ -103,7 +103,7 @@ namespace Rayzin.Tests.Primitives
         }
 
         [Test]
-        public void Deconstruct_Point3D_ProducesExpectedResults()
+        public void Deconstruct_RzPoint_ProducesExpectedResults()
         {
             var p = new RzPoint(4, 3, 2);
 

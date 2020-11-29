@@ -57,6 +57,8 @@ namespace Rayzin.Primitives
         public double Dot(RzVector v) => X * v.X + Y * v.Y + Z * v.Z;
         public RzVector Cross(RzVector v) => new RzVector(Y * v.Z - Z * v.Y, Z * v.X - X * v.Z, X * v.Y - Y * v.X);
 
+        public RzVector Reflect(RzVector normalVector) => this - normalVector * 2 * this.Dot(normalVector);
+
         public static implicit operator RzVector((double x, double y, double z) tuple) => new RzVector(tuple.x, tuple.y, tuple.z);
         public static implicit operator (double x, double y, double z)(RzVector vector) => (vector.X, vector.Y, vector.Z);
     }

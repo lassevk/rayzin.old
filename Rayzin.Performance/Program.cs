@@ -4,8 +4,8 @@
     {
         static void Main()
         {
-            new Point3DTests().Run();
-            new Vector3DTests().Run();
+            new RzPointTests().Run();
+            new RzVectorTests().Run();
         }
     }
 }

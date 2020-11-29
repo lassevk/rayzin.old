@@ -6,7 +6,7 @@ using Rayzin.Primitives;
 
 namespace Rayzin.Performance
 {
-    internal class Point3DTests
+    public class RzPointTests
     {
         public void Run()
         {
