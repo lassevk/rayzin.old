@@ -161,6 +161,24 @@ namespace Rayzin.Tests.Primitives
         }
 
         [Test]
+        public void Determinant_3x3Matrix_ProducesExpectedResult()
+        {
+            var m = new MatrixF(3, new double[] { 1, 2, 6, -5, 8, -4, 2, 6, 4 });
+
+            var actual = m.Determinant();
+            Assert.That(actual, Is.EqualTo(-196));
+        }
+
+        [Test]
+        public void Determinant_4x4Matrix_ProducesExpectedResult()
+        {
+            var m = new MatrixF(4, new double[] { -2, -8, 3, 5, -3, 1, 7, 3, 1, 2, -9, 6, -6, 7, 7, -9 });
+
+            var actual = m.Determinant();
+            Assert.That(actual, Is.EqualTo(-4071));
+        }
+
+        [Test]
         public void SubMatrix_Of3x3Matrix_ProducesExpectedResult()
         {
             var m = new MatrixF(3, new double[] { 1, 5, 0, -3, 2, 7, 0, 6, -3 });

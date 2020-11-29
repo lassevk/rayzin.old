@@ -143,7 +143,11 @@ namespace Rayzin.Primitives
                     return _Values[0] * _Values[3] - _Values[1] * _Values[2];
                 
                 default:
-                    throw new NotImplementedException();
+                    double result = 0;
+                    for (var x = 0; x < Size; x++)
+                        result += _Values[x] * CoFactor(0, x);
+
+                    return result;
             }
         }
 
