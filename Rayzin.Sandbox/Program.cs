@@ -19,13 +19,13 @@ namespace Rayzin.Sandbox
             var half = wallSize / 2;
 
             var shape = new RzSphere();
-            shape.Transformation = RzTransforms.None.Shear(1, 0, 0, 0, 0, 0).Scale(0.5, 0.25, 0.5).Shear(-1, 0, 0, 0, 0, 0).Scale(2, 4, 2);
+            shape.Transformation = RzTransforms.None.Translate(1, 0, 0);
             for (var y = 0; y < canvas.Height; y++)
             {
                 var worldY = half - pixelSize * y;
                 for (var x = 0; x < canvas.Width; x++)
                 {
-                    var worldX = half - pixelSize * x;
+                    var worldX = -half + pixelSize * x;
                     var position = new RzPoint(worldX, worldY, wallZ);
                     var r = new RzRay(origin, (position - origin).Normalize());
                     var xs = shape.Intersect(r);
