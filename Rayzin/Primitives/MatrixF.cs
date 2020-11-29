@@ -1,6 +1,4 @@
 using System;
-using System.Drawing;
-using System.Linq;
 using System.Text;
 
 using JetBrains.Annotations;
@@ -12,6 +10,12 @@ namespace Rayzin.Primitives
         [NotNull]
         private readonly double[] _Values;
 
+        public struct Presets
+        {
+            public static readonly MatrixF Identity4 = MatrixF.Identity(4);
+            public static readonly MatrixF Identity4Inverse = MatrixF.Identity(4).Inverse();
+        }
+
         public MatrixF(int size, [NotNull] params double[] values)
         {
             if (values == null)
@@ -22,7 +26,7 @@ namespace Rayzin.Primitives
                     nameof(values), $"values must have a length corresponding to size*size (={size * size}) but was {values.Length}");
 
             _Values = new double[size * size];
-            for (int index = 0; index < size * size; index++)
+            for (var index = 0; index < size * size; index++)
                 _Values[index] = values[index];
 
             Size = size;
@@ -30,22 +34,18 @@ namespace Rayzin.Primitives
 
         public int Size { get; }
 
-        public double this[int column, int row]
-        {
-            get => _Values[column * Size + row];
-            set => _Values[column * Size + row] = value;
-        }
+        public double this[int column, int row] => _Values[column * Size + row];
 
         public override string ToString()
         {
             var result = new StringBuilder();
-            for (int y = 0; y < Size; y++)
+            for (var y = 0; y < Size; y++)
             {
                 if (result.Length > 0)
                     result.AppendLine("");
 
                 result.Append("| ");
-                for (int x = 0; x < Size; x++)
+                for (var x = 0; x < Size; x++)
                 {
                     if (x > 0)
                         result.Append(" | ");
@@ -63,7 +63,7 @@ namespace Rayzin.Primitives
             if (Size != other.Size)
                 return false;
 
-            for (int index = 0; index < Size*Size; index++)
+            for (var index = 0; index < Size*Size; index++)
                 if (!Epsilon.Equals(_Values[index], other._Values[index]))
                     return false;
 
@@ -85,11 +85,11 @@ namespace Rayzin.Primitives
                     $"Matrices that are multiplied must have the same size, actual were {a.Size} vs. {b.Size}");
 
             var result = new double[a.Size * a.Size];
-            for (int y = 0; y < a.Size; y++)
-                for (int x = 0; x < a.Size; x++)
+            for (var y = 0; y < a.Size; y++)
+                for (var x = 0; x < a.Size; x++)
                 {
                     double sum = 0;
-                    for (int index = 0; index < a.Size; index++)
+                    for (var index = 0; index < a.Size; index++)
                         sum += a[y, index] * b[index, x];
 
                     result[y * a.Size + x] = sum;
@@ -107,10 +107,10 @@ namespace Rayzin.Primitives
                     $"A matrix multiplied by a tuple must have the same size vs. length, actual were {m.Size} vs. {t.Length}");
 
             var result = new double[t.Length];
-            for (int x = 0; x < t.Length; x++)
+            for (var x = 0; x < t.Length; x++)
             {
                 double sum = 0;
-                for (int y = 0; y < m.Size; y++)
+                for (var y = 0; y < m.Size; y++)
                     sum += m[x, y] * t[y];
 
                 result[x] = sum;
@@ -122,7 +122,7 @@ namespace Rayzin.Primitives
         public static MatrixF Identity(int size)
         {
             var values = new double[size * size];
-            for (int index = 0; index < size; index++)
+            for (var index = 0; index < size; index++)
                 values[index * size + index] = 1;
 
             return new MatrixF(size, values);
@@ -131,8 +131,8 @@ namespace Rayzin.Primitives
         public MatrixF Transpose()
         {
             var values = new double[Size * Size];
-            for (int x = 0; x < Size; x++)
-                for (int y = 0; y < Size; y++)
+            for (var x = 0; x < Size; x++)
+                for (var y = 0; y < Size; y++)
                     values[x * Size + y] = _Values[y * Size + x];
 
             return new MatrixF(Size, values);
@@ -156,16 +156,16 @@ namespace Rayzin.Primitives
 
         public MatrixF SubMatrix(int row, int column)
         {
-            int newSize = Size - 1;
-            double[] values = new double[newSize * newSize];
-            int y2 = 0;
-            for (int y1 = 0; y1 < Size; y1++)
+            var newSize = Size - 1;
+            var values = new double[newSize * newSize];
+            var y2 = 0;
+            for (var y1 = 0; y1 < Size; y1++)
             {
                 if (y1 == column)
                     continue;
 
-                int x2 = 0;
-                for (int x1 = 0; x1 < Size; x1++)
+                var x2 = 0;
+                for (var x1 = 0; x1 < Size; x1++)
                 {
                     if (x1 == row)
                         continue;
@@ -180,10 +180,7 @@ namespace Rayzin.Primitives
             return new MatrixF(newSize, values);
         }
 
-        public double Minor(int row, int column)
-        {
-            return SubMatrix(row, column).Determinant();
-        }
+        public double Minor(int row, int column) => SubMatrix(row, column).Determinant();
 
         public double CoFactor(int row, int column)
         {
@@ -204,10 +201,7 @@ namespace Rayzin.Primitives
             return new MatrixF(Size, cofactors);
         }
 
-        public bool IsInvertible()
-        {
-            return Determinant() != 0;
-        }
+        public bool IsInvertible() => Determinant() != 0;
 
         public MatrixF Inverse()
         {
@@ -218,12 +212,12 @@ namespace Rayzin.Primitives
             MatrixF cofactors = CoFactors();
             MatrixF transposedCofactors = cofactors.Transpose();
 
-            var inverse = new MatrixF(Size, new double[Size * Size]);
+            var values = new double[Size * Size];
             for (var row = 0; row < Size; row++)
                 for (var column = 0; column < Size; column++)
-                    inverse[column, row] = transposedCofactors[column, row] / determinant;
+                    values[column * Size + row] = transposedCofactors[column, row] / determinant;
 
-            return inverse;
+            return new MatrixF(4, values);
         }
 
         public MatrixF RotateX(double radians) => Transforms.RotationX(radians) * this;

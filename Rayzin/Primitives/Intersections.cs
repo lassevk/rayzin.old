@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Rayzin.Primitives
 {
-    public readonly struct Intersections
+    public readonly struct Intersections : IEnumerable<Intersection>
     {
         private readonly Intersection[] _Intersections;
 
@@ -31,5 +33,16 @@ namespace Rayzin.Primitives
 
             return result;
         }
+
+        public IEnumerator<Intersection> GetEnumerator()
+        {
+            if (_Intersections is null)
+                yield break;
+
+            foreach (Intersection intersection in _Intersections)
+                yield return intersection;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

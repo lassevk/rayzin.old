@@ -276,5 +276,14 @@ namespace Rayzin.Tests.Primitives
             var c = a * b;
             Assert.That(c * b.Inverse(), Is.EqualTo(a));
         }
+
+        [Test]
+        public void InverseOfIdentityMatrixIsIdentityMatrix()
+        {
+            var a = MatrixF.Identity(4);
+            var b = a.Inverse();
+
+            Assert.That(b, Is.EqualTo(a));
+        }
     }
 }

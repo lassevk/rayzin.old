@@ -8,9 +8,10 @@ namespace Rayzin.Objects
     {
         public override Intersections Intersect(RayF ray)
         {
-            Vector3D sphereToRay = ray.Origin - new Point3D(0, 0, 0); // to be replaced with something else?
-            var a = ray.Direction.Dot(ray.Direction);
-            var b = 2 * ray.Direction.Dot(sphereToRay);
+            RayF transformedRay = ray.Transform(InverseTransformation);
+            Vector3D sphereToRay = transformedRay.Origin - new Point3D(0, 0, 0);
+            var a = transformedRay.Direction.Dot(transformedRay.Direction);
+            var b = 2 * transformedRay.Direction.Dot(sphereToRay);
             var c = sphereToRay.Dot(sphereToRay) - 1;
             var discriminant = b * b - 4 * a * c;
             if (discriminant < 0)

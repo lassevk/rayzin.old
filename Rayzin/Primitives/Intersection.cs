@@ -21,5 +21,7 @@ namespace Rayzin.Primitives
         public static bool operator ==(Intersection left, Intersection right) => left.Equals(right);
 
         public static bool operator !=(Intersection left, Intersection right) => !left.Equals(right);
+
+        public override string ToString() => $"{Object} at {Time:G}";
     }
 }
