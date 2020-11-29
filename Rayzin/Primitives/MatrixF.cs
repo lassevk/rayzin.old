@@ -225,5 +225,11 @@ namespace Rayzin.Primitives
 
             return inverse;
         }
+
+        public MatrixF RotateX(double radians) => Transforms.RotationX(radians) * this;
+        public MatrixF RotateY(double radians) => Transforms.RotationY(radians) * this;
+        public MatrixF RotateZ(double radians) => Transforms.RotationZ(radians) * this;
+        public MatrixF Scale(double x, double y, double z) => Transforms.Scaling(x, y, z) * this;
+        public MatrixF Translate(double x, double y, double z) => Transforms.Translation(x, y, z) * this;
     }
 }

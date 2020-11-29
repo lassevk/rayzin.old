@@ -130,5 +130,43 @@ namespace Rayzin.Tests.Primitives
             Point3D output = transform * p;
             Assert.That(output, Is.EqualTo(new Point3D(expectedX, expectedY, expectedZ)));
         }
+
+        [Test]
+        public void ApplyMultipleTranslationsInSequence_ProducesExpectedResults()
+        {
+            var p = new Point3D(1, 0, 1);
+            MatrixF a = Transforms.RotationX(Math.PI / 2);
+            MatrixF b = Transforms.Scaling(5, 5, 5);
+            MatrixF c = Transforms.Translation(10, 5, 7);
+
+            Point3D p2 = a * p;
+            Assert.That(p2, Is.EqualTo(new Point3D(1, -1, 0)));
+
+            Point3D p3 = b * p2;
+            Assert.That(p3, Is.EqualTo(new Point3D(5, -5, 0)));
+
+            Point3D p4 = c * p3;
+            Assert.That(p4, Is.EqualTo(new Point3D(15, 0, 7)));
+        }
+
+        [Test]
+        public void ApplyMultipleTranslationsAsOneOperation_ProducesExpectedResults()
+        {
+            var p = new Point3D(1, 0, 1);
+            MatrixF a = Transforms.RotationX(Math.PI / 2);
+            MatrixF b = Transforms.Scaling(5, 5, 5);
+            MatrixF c = Transforms.Translation(10, 5, 7);
+
+            MatrixF t = c * b * a;
+            Assert.That(t * p, Is.EqualTo(new Point3D(15, 0, 7)));
+        }
+
+        [Test]
+        public void ApplyMultipleTranslationsAsOneOperation_UsingFluentAPI_ProducesExpectedResults()
+        {
+            var p = new Point3D(1, 0, 1);
+            MatrixF t = MatrixF.Identity(4).RotateX(Math.PI / 2).Scale(5, 5, 5).Translate(10, 5, 7);
+            Assert.That(t * p, Is.EqualTo(new Point3D(15, 0, 7)));
+        }
     }
 }
