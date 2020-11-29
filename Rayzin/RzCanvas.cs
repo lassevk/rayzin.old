@@ -10,12 +10,12 @@ using Rayzin.Primitives;
 
 namespace Rayzin
 {
-    public class CanvasF
+    public class RzCanvas
     {
         [NotNull]
-        private readonly ColorF[,] _Pixels;
+        private readonly RzColor[,] _Pixels;
 
-        public CanvasF(int width, int height)
+        public RzCanvas(int width, int height)
         {
             if (width < 1)
                 throw new ArgumentOutOfRangeException(nameof(width), "width must be at least 1");
@@ -23,17 +23,17 @@ namespace Rayzin
             if (height < 1)
                 throw new ArgumentOutOfRangeException(nameof(height), "height must be at least 1");
 
-            _Pixels = new ColorF[width, height];
+            _Pixels = new RzColor[width, height];
             Width = width;
             Height = height;
         }
 
-        public ColorF this[int x, int y]
+        public RzColor this[int x, int y]
         {
             get
             {
                 if (x < 0 || y < 0 || x >= Width || y >= Height)
-                    return ColorF.Presets.Black;
+                    return RzColor.Presets.Black;
 
                 return _Pixels[x, y];
             }
@@ -90,7 +90,7 @@ namespace Rayzin
             {
                 for (var x = 0; x < Width; x++)
                 {
-                    ColorF color = this[x, y].Clamp();
+                    RzColor color = this[x, y].Clamp();
                     appendComponent(color.Red);
                     appendComponent(color.Green);
                     appendComponent(color.Blue);
@@ -122,9 +122,9 @@ namespace Rayzin
             File.WriteAllText(filename, ToPpm(), Encoding.ASCII);
         }
 
-        public void Clear() => Clear(ColorF.Presets.Black);
+        public void Clear() => Clear(RzColor.Presets.Black);
 
-        public void Clear(ColorF color)
+        public void Clear(RzColor color)
         {
             for (int y = 0; y < Height; y++)
                 for (int x = 0; x < Width; x++)

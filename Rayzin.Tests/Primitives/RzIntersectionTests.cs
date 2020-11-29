@@ -10,19 +10,19 @@ using Rayzin.Primitives;
 namespace Rayzin.Tests.Primitives
 {
     [TestFixture]
-    public class IntersectionTests
+    public class RzIntersectionTests
     {
         [Test]
         public void NullObject_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new Intersection(null, 0));
+            Assert.Throws<ArgumentNullException>(() => new RzIntersection(null, 0));
         }
 
         [Test]
         public void Properties_AreGivenExpectedValues()
         {
-            var s = new Sphere();
-            var i = new Intersection(s, 1);
+            var s = new RzSphere();
+            var i = new RzIntersection(s, 1);
 
             Assert.That(i.Object, Is.SameAs(s));
             Assert.That(i.Time, Is.EqualTo(1));

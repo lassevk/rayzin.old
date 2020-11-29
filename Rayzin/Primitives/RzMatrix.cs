@@ -5,18 +5,18 @@ using JetBrains.Annotations;
 
 namespace Rayzin.Primitives
 {
-    public readonly struct MatrixF : IEquatable<MatrixF>
+    public readonly struct RzMatrix : IEquatable<RzMatrix>
     {
         [NotNull]
         private readonly double[] _Values;
 
         public struct Presets
         {
-            public static readonly MatrixF Identity4 = MatrixF.Identity(4);
-            public static readonly MatrixF Identity4Inverse = MatrixF.Identity(4).Inverse();
+            public static readonly RzMatrix Identity4 = RzMatrix.Identity(4);
+            public static readonly RzMatrix Identity4Inverse = RzMatrix.Identity(4).Inverse();
         }
 
-        public MatrixF(int size, [NotNull] params double[] values)
+        public RzMatrix(int size, [NotNull] params double[] values)
         {
             if (values == null)
                 throw new ArgumentNullException(nameof(values));
@@ -58,27 +58,27 @@ namespace Rayzin.Primitives
             return result.ToString();
         }
 
-        public bool Equals(MatrixF other)
+        public bool Equals(RzMatrix other)
         {
             if (Size != other.Size)
                 return false;
 
             for (var index = 0; index < Size*Size; index++)
-                if (!Epsilon.Equals(_Values[index], other._Values[index]))
+                if (!RzEpsilon.Equals(_Values[index], other._Values[index]))
                     return false;
 
             return true;
         }
 
-        public override bool Equals(object obj) => obj is MatrixF other && Equals(other);
+        public override bool Equals(object obj) => obj is RzMatrix other && Equals(other);
 
         public override int GetHashCode() => throw new NotSupportedException();
 
-        public static bool operator ==(MatrixF left, MatrixF right) => left.Equals(right);
+        public static bool operator ==(RzMatrix left, RzMatrix right) => left.Equals(right);
 
-        public static bool operator !=(MatrixF left, MatrixF right) => !left.Equals(right);
+        public static bool operator !=(RzMatrix left, RzMatrix right) => !left.Equals(right);
 
-        public static MatrixF operator *(MatrixF a, MatrixF b)
+        public static RzMatrix operator *(RzMatrix a, RzMatrix b)
         {
             if (a.Size != b.Size)
                 throw new InvalidOperationException(
@@ -95,12 +95,12 @@ namespace Rayzin.Primitives
                     result[y * a.Size + x] = sum;
                 }
 
-            return new MatrixF(4, result);
+            return new RzMatrix(4, result);
         }
 
-        public static Point3D operator *(MatrixF m, Point3D p) => (Point3D)(m * (TupleF)p);
-        public static Vector3D operator *(MatrixF m, Vector3D v) => (Vector3D)(m * (TupleF)v);
-        public static TupleF operator *(MatrixF m, TupleF t)
+        public static RzPoint operator *(RzMatrix m, RzPoint p) => (RzPoint)(m * (RzTuple)p);
+        public static RzVector operator *(RzMatrix m, RzVector v) => (RzVector)(m * (RzTuple)v);
+        public static RzTuple operator *(RzMatrix m, RzTuple t)
         {
             if (m.Size != t.Length)
                 throw new InvalidOperationException(
@@ -116,26 +116,26 @@ namespace Rayzin.Primitives
                 result[x] = sum;
             }
 
-            return new TupleF(result);
+            return new RzTuple(result);
         }
 
-        public static MatrixF Identity(int size)
+        public static RzMatrix Identity(int size)
         {
             var values = new double[size * size];
             for (var index = 0; index < size; index++)
                 values[index * size + index] = 1;
 
-            return new MatrixF(size, values);
+            return new RzMatrix(size, values);
         }
 
-        public MatrixF Transpose()
+        public RzMatrix Transpose()
         {
             var values = new double[Size * Size];
             for (var x = 0; x < Size; x++)
                 for (var y = 0; y < Size; y++)
                     values[x * Size + y] = _Values[y * Size + x];
 
-            return new MatrixF(Size, values);
+            return new RzMatrix(Size, values);
         }
 
         public double Determinant()
@@ -154,7 +154,7 @@ namespace Rayzin.Primitives
             }
         }
 
-        public MatrixF SubMatrix(int row, int column)
+        public RzMatrix SubMatrix(int row, int column)
         {
             var newSize = Size - 1;
             var values = new double[newSize * newSize];
@@ -177,7 +177,7 @@ namespace Rayzin.Primitives
                 y2++;
             }
 
-            return new MatrixF(newSize, values);
+            return new RzMatrix(newSize, values);
         }
 
         public double Minor(int row, int column) => SubMatrix(row, column).Determinant();
@@ -191,39 +191,39 @@ namespace Rayzin.Primitives
             return minor;
         }
 
-        public MatrixF CoFactors()
+        public RzMatrix CoFactors()
         {
             var cofactors = new double[Size * Size];
             for (var row = 0; row < Size; row++)
                 for (var column = 0; column < Size; column++)
                     cofactors[row * Size + column] = CoFactor(row, column);
 
-            return new MatrixF(Size, cofactors);
+            return new RzMatrix(Size, cofactors);
         }
 
         public bool IsInvertible() => Determinant() != 0;
 
-        public MatrixF Inverse()
+        public RzMatrix Inverse()
         {
             var determinant = Determinant();
             if (determinant == 0)
                 throw new InvalidOperationException("Matrix is not invertible, has a zero determinant");
 
-            MatrixF cofactors = CoFactors();
-            MatrixF transposedCofactors = cofactors.Transpose();
+            RzMatrix cofactors = CoFactors();
+            RzMatrix transposedCofactors = cofactors.Transpose();
 
             var values = new double[Size * Size];
             for (var row = 0; row < Size; row++)
                 for (var column = 0; column < Size; column++)
                     values[column * Size + row] = transposedCofactors[column, row] / determinant;
 
-            return new MatrixF(4, values);
+            return new RzMatrix(4, values);
         }
 
-        public MatrixF RotateX(double radians) => Transforms.RotationX(radians) * this;
-        public MatrixF RotateY(double radians) => Transforms.RotationY(radians) * this;
-        public MatrixF RotateZ(double radians) => Transforms.RotationZ(radians) * this;
-        public MatrixF Scale(double x, double y, double z) => Transforms.Scaling(x, y, z) * this;
-        public MatrixF Translate(double x, double y, double z) => Transforms.Translation(x, y, z) * this;
+        public RzMatrix RotateX(double radians) => RzTransforms.RotationX(radians) * this;
+        public RzMatrix RotateY(double radians) => RzTransforms.RotationY(radians) * this;
+        public RzMatrix RotateZ(double radians) => RzTransforms.RotationZ(radians) * this;
+        public RzMatrix Scale(double x, double y, double z) => RzTransforms.Scaling(x, y, z) * this;
+        public RzMatrix Translate(double x, double y, double z) => RzTransforms.Translation(x, y, z) * this;
     }
 }

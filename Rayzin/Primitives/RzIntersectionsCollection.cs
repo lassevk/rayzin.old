@@ -5,24 +5,24 @@ using System.Linq;
 
 namespace Rayzin.Primitives
 {
-    public readonly struct Intersections : IEnumerable<Intersection>
+    public readonly struct RzIntersectionsCollection : IEnumerable<RzIntersection>
     {
-        private readonly Intersection[] _Intersections;
+        private readonly RzIntersection[] _Intersections;
 
-        public Intersections(params Intersection[] intersections)
+        public RzIntersectionsCollection(params RzIntersection[] intersections)
             => _Intersections = (intersections ?? throw new ArgumentNullException(nameof(intersections))).ToArray();
 
-        public Intersection this[int index] => _Intersections?[index] ?? default;
+        public RzIntersection this[int index] => _Intersections?[index] ?? default;
 
         public int Count => _Intersections?.Length ?? 0;
 
-        public Intersection? Hit()
+        public RzIntersection? Hit()
         {
             if (_Intersections is null || _Intersections.Length == 0)
                 return null;
 
-            Intersection? result = null;
-            foreach (Intersection intersection in _Intersections)
+            RzIntersection? result = null;
+            foreach (RzIntersection intersection in _Intersections)
             {
                 if (intersection.Time < 0)
                     continue;
@@ -34,12 +34,12 @@ namespace Rayzin.Primitives
             return result;
         }
 
-        public IEnumerator<Intersection> GetEnumerator()
+        public IEnumerator<RzIntersection> GetEnumerator()
         {
             if (_Intersections is null)
                 yield break;
 
-            foreach (Intersection intersection in _Intersections)
+            foreach (RzIntersection intersection in _Intersections)
                 yield return intersection;
         }
 

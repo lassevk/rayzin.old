@@ -4,10 +4,10 @@ namespace Rayzin.Sandbox
 {
     internal struct Projectile
     {
-        public Projectile(Point3D position, Vector3D velocity) => (Position, Velocity) = (position, velocity);
+        public Projectile(RzPoint position, RzVector velocity) => (Position, Velocity) = (position, velocity);
 
-        public Point3D Position { get; }
+        public RzPoint Position { get; }
 
-        public Vector3D Velocity { get; }
+        public RzVector Velocity { get; }
     }
 }

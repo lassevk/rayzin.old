@@ -17,8 +17,8 @@ namespace Rayzin.Performance
 
         private void CompareEqual()
         {
-            Point3D p1 = new Point3D(1, 1, 1);
-            Point3D p2 = new Point3D(1, 1, 1);
+            RzPoint p1 = new RzPoint(1, 1, 1);
+            RzPoint p2 = new RzPoint(1, 1, 1);
 
             for (int index = 0; index < 100000; index++)
                 p1.Equals(p2);
@@ -26,8 +26,8 @@ namespace Rayzin.Performance
 
         private void CompareDifferent()
         {
-            Point3D p1 = new Point3D(1, 1, 1);
-            Point3D p2 = new Point3D(2, 2, 2);
+            RzPoint p1 = new RzPoint(1, 1, 1);
+            RzPoint p2 = new RzPoint(2, 2, 2);
 
             for (int index = 0; index < 100000; index++)
                 p1.Equals(p2);
@@ -36,7 +36,7 @@ namespace Rayzin.Performance
         private void Constructor()
         {
             for (int index = 0; index < 100000; index++)
-                new Point3D(1, 1, 1);
+                new RzPoint(1, 1, 1);
         }
     }
 }

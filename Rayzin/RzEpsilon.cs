@@ -2,7 +2,7 @@ using System;
 
 namespace Rayzin
 {
-    public struct Epsilon
+    public struct RzEpsilon
     {
         public const double Value = 1e-5;
 

@@ -4,10 +4,10 @@ namespace Rayzin.Sandbox
 {
     public struct Environment
     {
-        public Environment(Vector3D gravity, Vector3D wind) => (Gravity, Wind) = (gravity, wind);
+        public Environment(RzVector gravity, RzVector wind) => (Gravity, Wind) = (gravity, wind);
 
-        public Vector3D Gravity { get; }
+        public RzVector Gravity { get; }
 
-        public Vector3D Wind { get; }
+        public RzVector Wind { get; }
     }
 }

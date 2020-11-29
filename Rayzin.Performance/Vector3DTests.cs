@@ -14,14 +14,14 @@ namespace Rayzin.Performance
 
         private void NormalizeAlreadyNormalized()
         {
-            var v = new Vector3D(1 / Math.Sqrt(3), 1 / Math.Sqrt(3), 1 / Math.Sqrt(3));
+            var v = new RzVector(1 / Math.Sqrt(3), 1 / Math.Sqrt(3), 1 / Math.Sqrt(3));
             for (int index = 0; index < 1000000; index++)
                 v.Normalize();
         }
 
         private void NormalizeDenormalized()
         {
-            var v = new Vector3D(3, 3, 3);
+            var v = new RzVector(3, 3, 3);
             for (int index = 0; index < 1000000; index++)
                 v.Normalize();
         }

@@ -5,11 +5,11 @@ using JetBrains.Annotations;
 
 namespace Rayzin.Primitives
 {
-    public readonly struct TupleF : IEquatable<TupleF>
+    public readonly struct RzTuple : IEquatable<RzTuple>
     {
         private readonly double[] _Values;
         
-        public TupleF([NotNull] params double[] values)
+        public RzTuple([NotNull] params double[] values)
         {
             _Values = values.ToArray();
         }
@@ -18,34 +18,34 @@ namespace Rayzin.Primitives
 
         public int Length => _Values?.Length ?? 0;
 
-        public static implicit operator TupleF(Point3D p) => new TupleF(p.X, p.Y, p.Z, 1);
-        public static implicit operator TupleF(Vector3D v) => new TupleF(v.X, v.Y, v.Z, 0);
+        public static implicit operator RzTuple(RzPoint p) => new RzTuple(p.X, p.Y, p.Z, 1);
+        public static implicit operator RzTuple(RzVector v) => new RzTuple(v.X, v.Y, v.Z, 0);
 
-        public static explicit operator Point3D(TupleF t)
+        public static explicit operator RzPoint(RzTuple t)
         {
             if (t.Length != 4)
                 throw new InvalidOperationException();
 
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (t._Values[3] != 1)
-                throw new InvalidOperationException("A TupleF must have W ([3]) = 1 to cast to a Point3D");
+                throw new InvalidOperationException("A RzTuple must have W ([3]) = 1 to cast to a RzPoint");
 
-            return new Point3D(t._Values[0], t._Values[1], t._Values[2]);
+            return new RzPoint(t._Values[0], t._Values[1], t._Values[2]);
         }
 
-        public static explicit operator Vector3D(TupleF t)
+        public static explicit operator RzVector(RzTuple t)
         {
             if (t.Length != 4)
                 throw new InvalidOperationException();
 
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (t._Values[3] != 0)
-                throw new InvalidOperationException("A TupleF must have W ([3]) = 0 to cast to a Vector3D");
+                throw new InvalidOperationException("A RzTuple must have W ([3]) = 0 to cast to a RzVector");
 
-            return new Vector3D(t._Values[0], t._Values[1], t._Values[2]);
+            return new RzVector(t._Values[0], t._Values[1], t._Values[2]);
         }
 
-        public bool Equals(TupleF other)
+        public bool Equals(RzTuple other)
         {
             if (_Values?.Length != other._Values?.Length)
                 return false;
@@ -54,19 +54,19 @@ namespace Rayzin.Primitives
                 return false;
             
             for (int index = 0; index < _Values.Length; index++)
-                if (!Epsilon.Equals(_Values[index], other._Values[index]))
+                if (!RzEpsilon.Equals(_Values[index], other._Values[index]))
                     return false;
 
             return true;
         }
 
-        public override bool Equals(object obj) => obj is TupleF other && Equals(other);
+        public override bool Equals(object obj) => obj is RzTuple other && Equals(other);
 
         public override int GetHashCode() => throw new NotSupportedException();
 
-        public static bool operator ==(TupleF left, TupleF right) => left.Equals(right);
+        public static bool operator ==(RzTuple left, RzTuple right) => left.Equals(right);
 
-        public static bool operator !=(TupleF left, TupleF right) => !left.Equals(right);
+        public static bool operator !=(RzTuple left, RzTuple right) => !left.Equals(right);
 
         public override string ToString() => $"({string.Join(", ", _Values)})";
     }
