@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 using NUnit.Framework;
 
@@ -75,6 +76,25 @@ namespace Rayzin.Tests.Primitives
             var p = new Point3D(2, 3, 4);
             Point3D output = transform * p;
             Assert.That(output, Is.EqualTo(new Point3D(-2, 3, 4)));
+        }
+
+        [Test]
+        public void Rotations_ReturnsExpectedResults()
+        {
+            var p = new Point3D(0, 1, 0);
+            var halfQuarter = Transforms.RotationX(Math.PI / 4);
+            var fullQuarter = Transforms.RotationX(Math.PI / 2);
+            Assert.That(halfQuarter * p, Is.EqualTo(new Point3D(0, Math.Sqrt(2) / 2, Math.Sqrt(2) / 2)));
+            Assert.That(fullQuarter * p, Is.EqualTo(new Point3D(0, 0, 1)));
+        }
+
+        [Test]
+        public void InverseRotations_ReturnsExpectedResults()
+        {
+            var p = new Point3D(0, 1, 0);
+            var halfQuarter = Transforms.RotationX(Math.PI / 4);
+            var inverse = halfQuarter.Inverse();
+            Assert.That(inverse * p, Is.EqualTo(new Point3D(0, Math.Sqrt(2) / 2, -Math.Sqrt(2) / 2)));
         }
     }
 }
