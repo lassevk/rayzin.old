@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 
 using NUnit.Framework;
 
@@ -82,8 +81,8 @@ namespace Rayzin.Tests.Primitives
         public void RotationAroundX_ReturnsExpectedResults()
         {
             var p = new Point3D(0, 1, 0);
-            var halfQuarter = Transforms.RotationX(Math.PI / 4);
-            var fullQuarter = Transforms.RotationX(Math.PI / 2);
+            MatrixF halfQuarter = Transforms.RotationX(Math.PI / 4);
+            MatrixF fullQuarter = Transforms.RotationX(Math.PI / 2);
             Assert.That(halfQuarter * p, Is.EqualTo(new Point3D(0, Math.Sqrt(2) / 2, Math.Sqrt(2) / 2)));
             Assert.That(fullQuarter * p, Is.EqualTo(new Point3D(0, 0, 1)));
         }
@@ -92,8 +91,8 @@ namespace Rayzin.Tests.Primitives
         public void InverseRotationAroundX_ReturnsExpectedResults()
         {
             var p = new Point3D(0, 1, 0);
-            var halfQuarter = Transforms.RotationX(Math.PI / 4);
-            var inverse = halfQuarter.Inverse();
+            MatrixF halfQuarter = Transforms.RotationX(Math.PI / 4);
+            MatrixF inverse = halfQuarter.Inverse();
             Assert.That(inverse * p, Is.EqualTo(new Point3D(0, Math.Sqrt(2) / 2, -Math.Sqrt(2) / 2)));
         }
 
@@ -101,8 +100,8 @@ namespace Rayzin.Tests.Primitives
         public void RotationAroundY_ReturnsExpectedResults()
         {
             var p = new Point3D(0, 0, 1);
-            var halfQuarter = Transforms.RotationY(Math.PI / 4);
-            var fullQuarter = Transforms.RotationY(Math.PI / 2);
+            MatrixF halfQuarter = Transforms.RotationY(Math.PI / 4);
+            MatrixF fullQuarter = Transforms.RotationY(Math.PI / 2);
             Assert.That(halfQuarter * p, Is.EqualTo(new Point3D(Math.Sqrt(2) / 2, 0, Math.Sqrt(2) / 2)));
             Assert.That(fullQuarter * p, Is.EqualTo(new Point3D(1, 0, 0)));
         }
@@ -111,8 +110,8 @@ namespace Rayzin.Tests.Primitives
         public void RotationAroundZ_ReturnsExpectedResults()
         {
             var p = new Point3D(0, 1, 0);
-            var halfQuarter = Transforms.RotationZ(Math.PI / 4);
-            var fullQuarter = Transforms.RotationZ(Math.PI / 2);
+            MatrixF halfQuarter = Transforms.RotationZ(Math.PI / 4);
+            MatrixF fullQuarter = Transforms.RotationZ(Math.PI / 2);
             Assert.That(halfQuarter * p, Is.EqualTo(new Point3D(-Math.Sqrt(2) / 2, Math.Sqrt(2) / 2, 0)));
             Assert.That(fullQuarter * p, Is.EqualTo(new Point3D(-1, 0, 0)));
         }
