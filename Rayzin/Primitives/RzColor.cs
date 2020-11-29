@@ -7,11 +7,11 @@ namespace Rayzin.Primitives
     {
         public struct Presets
         {
-            public static readonly RzColor Black = new RzColor(0, 0, 0);
-            public static readonly RzColor Red = new RzColor(1, 0, 0);
-            public static readonly RzColor Green = new RzColor(0, 1, 0);
-            public static readonly RzColor Blue = new RzColor(0, 0, 1);
-            public static readonly RzColor White = new RzColor(1, 1, 1);
+            public static readonly RzColor Black = (0, 0, 0);
+            public static readonly RzColor Red = (1, 0, 0);
+            public static readonly RzColor Green = (0, 1, 0);
+            public static readonly RzColor Blue = (0, 0, 1);
+            public static readonly RzColor White = (1, 1, 1);
         }
 
         public RzColor(double red, double green, double blue) => (Red, Green, Blue) = (red, green, blue);
@@ -64,5 +64,9 @@ namespace Rayzin.Primitives
             RzColor c = Clamp();
             return Color.FromArgb((int)(255 * c.Red), (int)(255 * c.Green), (int)(255 * c.Blue));
         }
+
+        public static implicit operator RzColor((double red, double green, double blue) tuple) => new RzColor(tuple.red, tuple.green, tuple.blue);
+        public static implicit operator (double red, double green, double blue)(RzColor color) => (color.Red, color.Green, color.Blue);
+
     }
 }

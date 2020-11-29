@@ -6,10 +6,10 @@ namespace Rayzin.Primitives
     {
         public struct Presets
         {
-            public static readonly RzVector Zero = new RzVector(0, 0, 0);
-            public static readonly RzVector UnitX = new RzVector(1, 0, 0);
-            public static readonly RzVector UnitY = new RzVector(0, 1, 0);
-            public static readonly RzVector UnitZ = new RzVector(0, 0, 1);
+            public static readonly RzVector Zero = (0, 0, 0);
+            public static readonly RzVector UnitX = (1, 0, 0);
+            public static readonly RzVector UnitY = (0, 1, 0);
+            public static readonly RzVector UnitZ = (0, 0, 1);
         }
 
         public RzVector(double x, double y, double z) => (X, Y, Z) = (x, y, z);
@@ -56,5 +56,8 @@ namespace Rayzin.Primitives
 
         public double Dot(RzVector v) => X * v.X + Y * v.Y + Z * v.Z;
         public RzVector Cross(RzVector v) => new RzVector(Y * v.Z - Z * v.Y, Z * v.X - X * v.Z, X * v.Y - Y * v.X);
+
+        public static implicit operator RzVector((double x, double y, double z) tuple) => new RzVector(tuple.x, tuple.y, tuple.z);
+        public static implicit operator (double x, double y, double z)(RzVector vector) => (vector.X, vector.Y, vector.Z);
     }
 }

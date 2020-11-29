@@ -31,5 +31,8 @@ namespace Rayzin.Primitives
 
         public static RzVector operator -(RzPoint p1, RzPoint p2) => new RzVector(p1.X - p2.X, p1.Y - p2.Y, p1.Z - p2.Z);
         public static RzPoint operator +(RzPoint p, RzVector v) => new RzPoint(p.X + v.X, p.Y + v.Y, p.Z + v.Z);
+
+        public static implicit operator RzPoint((double x, double y, double z) tuple) => new RzPoint(tuple.x, tuple.y, tuple.z);
+        public static implicit operator (double x, double y, double z)(RzPoint point) => (point.X, point.Y, point.Z);
     }
 }
