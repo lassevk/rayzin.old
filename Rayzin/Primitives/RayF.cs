@@ -15,5 +15,7 @@ namespace Rayzin.Primitives
         public Point3D Position(double t) => Origin + Direction * t;
 
         public Intersections Intersect(Object3D obj) => obj.Intersect(this);
+
+        public RayF Transform(MatrixF transformation) => new RayF(transformation * Origin, transformation * Direction);
     }
 }
