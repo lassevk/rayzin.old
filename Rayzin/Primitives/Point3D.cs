@@ -2,7 +2,7 @@ using System;
 
 namespace Rayzin.Primitives
 {
-    public struct Point3D : IEquatable<Point3D>
+    public readonly struct Point3D : IEquatable<Point3D>
     {
         public struct Presets
         {

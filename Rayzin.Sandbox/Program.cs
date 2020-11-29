@@ -1,4 +1,5 @@
-﻿using System.Drawing.Imaging;
+﻿using System;
+using System.Drawing.Imaging;
 
 using Rayzin.Primitives;
 
@@ -8,22 +9,20 @@ namespace Rayzin.Sandbox
     {
         static void Main()
         {
-            var canvas = new CanvasF(900, 550);
-            canvas.Clear(ColorF.Presets.Blue);
-            var env = new Environment(new Vector3D(0, -0.1, 0), new Vector3D(-0.01, 0, 0));
-            var p = new Projectile(new Point3D(0, 0, 0), new Vector3D(1, 1.8, 0).Normalize() * 11.25);
+            var canvas = new CanvasF(1024, 1024);
 
-            while (p.Position.Y > 0)
+            var point = new Point3D(512, 40, 0);
+            MatrixF transform = MatrixF.Identity(4).Translate(-512, -512, 0).RotateZ(Math.PI * 2 / 12).Translate(512, 512, 0);
+
+            for (var index = 0; index < 12; index++)
             {
-                p = Tick(env, p);
+                for (var dx = -10; dx <= 10; dx++)
+                    for (var dy = -10; dy <= 10; dy++)
+                        canvas[(int)(point.X + dx), (int)(point.Y + dy)] = ColorF.Presets.White;
 
-                int x = (int)(p.Position.X);
-                int y = canvas.Height - (int)(p.Position.Y);
-
-                canvas[x, y] = ColorF.Presets.Red;
+                point = transform * point;
             }
 
-            canvas.SaveToPpm(@"D:\temp\test.ppm");
             canvas.ToBitmap().Save(@"D:\Temp\test.png", ImageFormat.Png);
         }
 

@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 
 namespace Rayzin.Primitives
 {
-    public struct MatrixF : IEquatable<MatrixF>
+    public readonly struct MatrixF : IEquatable<MatrixF>
     {
         [NotNull]
         private readonly double[] _Values;

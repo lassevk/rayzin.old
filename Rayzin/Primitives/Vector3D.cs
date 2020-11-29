@@ -2,7 +2,7 @@ using System;
 
 namespace Rayzin.Primitives
 {
-    public struct Vector3D : IEquatable<Vector3D>
+    public readonly struct Vector3D : IEquatable<Vector3D>
     {
         public struct Presets
         {

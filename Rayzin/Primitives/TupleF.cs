@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 
 namespace Rayzin.Primitives
 {
-    public struct TupleF : IEquatable<TupleF>
+    public readonly struct TupleF : IEquatable<TupleF>
     {
         private readonly double[] _Values;
         

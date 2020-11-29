@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Rayzin.Primitives
 {
-    public struct ColorF : IEquatable<ColorF>
+    public readonly struct ColorF : IEquatable<ColorF>
     {
         public struct Presets
         {
