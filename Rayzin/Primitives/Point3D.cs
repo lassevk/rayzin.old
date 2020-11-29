@@ -17,16 +17,11 @@ namespace Rayzin.Primitives
         public double Y { get; }
         public double Z { get; }
 
-        public double W => 1;
-
         public bool Equals(Point3D other) => Epsilon.Equals(X, other.X) && Epsilon.Equals(Y, other.Y) && Epsilon.Equals(Z, other.Z);
 
         public override bool Equals(object obj) => obj is Point3D other && Equals(other);
 
-        public override int GetHashCode()
-        {
-            throw new NotSupportedException();
-        }
+        public override int GetHashCode() => throw new NotSupportedException();
 
         public static bool operator ==(Point3D left, Point3D right) => left.Equals(right);
 

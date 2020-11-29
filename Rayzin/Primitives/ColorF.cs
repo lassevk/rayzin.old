@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 
 namespace Rayzin.Primitives
 {
@@ -27,10 +28,7 @@ namespace Rayzin.Primitives
 
         public override bool Equals(object obj) => obj is ColorF other && Equals(other);
 
-        public override int GetHashCode()
-        {
-            throw new NotSupportedException();
-        }
+        public override int GetHashCode() => throw new NotSupportedException();
 
         public static bool operator ==(ColorF left, ColorF right) => left.Equals(right);
 
@@ -60,5 +58,11 @@ namespace Rayzin.Primitives
         }
 
         public ColorF Clamp() => new ColorF(Math.Min(Math.Max(0, Red), 1), Math.Min(Math.Max(0, Green), 1), Math.Min(Math.Max(0, Blue), 1));
+
+        public Color ToColor()
+        {
+            ColorF c = Clamp();
+            return Color.FromArgb((int)(255 * c.Red), (int)(255 * c.Green), (int)(255 * c.Blue));
+        }
     }
 }

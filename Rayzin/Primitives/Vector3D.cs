@@ -19,16 +19,11 @@ namespace Rayzin.Primitives
         public double Y { get; }
         public double Z { get; }
 
-        public double W => 0;
-
         public bool Equals(Vector3D other) => Epsilon.Equals(X, other.X) && Epsilon.Equals(Y, other.Y) && Epsilon.Equals(Z, other.Z);
 
         public override bool Equals(object obj) => obj is Vector3D other && Equals(other);
 
-        public override int GetHashCode()
-        {
-            throw new NotSupportedException();
-        }
+        public override int GetHashCode() => throw new NotSupportedException();
 
         public static bool operator ==(Vector3D left, Vector3D right) => left.Equals(right);
 
@@ -52,6 +47,9 @@ namespace Rayzin.Primitives
             var magnitude = Magnitude;
             if (Epsilon.Equals(magnitude, 1))
                 return this;
+
+            if (Epsilon.Equals(magnitude, 0))
+                throw new DivideByZeroException("Vector has a magnitude of 0, no direction known");
             
             return new Vector3D(X / magnitude, Y / magnitude, Z / magnitude);
         }
