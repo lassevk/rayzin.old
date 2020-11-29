@@ -79,7 +79,7 @@ namespace Rayzin.Tests.Primitives
         }
 
         [Test]
-        public void Rotations_ReturnsExpectedResults()
+        public void RotationAroundX_ReturnsExpectedResults()
         {
             var p = new Point3D(0, 1, 0);
             var halfQuarter = Transforms.RotationX(Math.PI / 4);
@@ -89,12 +89,32 @@ namespace Rayzin.Tests.Primitives
         }
 
         [Test]
-        public void InverseRotations_ReturnsExpectedResults()
+        public void InverseRotationAroundX_ReturnsExpectedResults()
         {
             var p = new Point3D(0, 1, 0);
             var halfQuarter = Transforms.RotationX(Math.PI / 4);
             var inverse = halfQuarter.Inverse();
             Assert.That(inverse * p, Is.EqualTo(new Point3D(0, Math.Sqrt(2) / 2, -Math.Sqrt(2) / 2)));
+        }
+
+        [Test]
+        public void RotationAroundY_ReturnsExpectedResults()
+        {
+            var p = new Point3D(0, 0, 1);
+            var halfQuarter = Transforms.RotationY(Math.PI / 4);
+            var fullQuarter = Transforms.RotationY(Math.PI / 2);
+            Assert.That(halfQuarter * p, Is.EqualTo(new Point3D(Math.Sqrt(2) / 2, 0, Math.Sqrt(2) / 2)));
+            Assert.That(fullQuarter * p, Is.EqualTo(new Point3D(1, 0, 0)));
+        }
+
+        [Test]
+        public void RotationAroundZ_ReturnsExpectedResults()
+        {
+            var p = new Point3D(0, 1, 0);
+            var halfQuarter = Transforms.RotationZ(Math.PI / 4);
+            var fullQuarter = Transforms.RotationZ(Math.PI / 2);
+            Assert.That(halfQuarter * p, Is.EqualTo(new Point3D(-Math.Sqrt(2) / 2, Math.Sqrt(2) / 2, 0)));
+            Assert.That(fullQuarter * p, Is.EqualTo(new Point3D(-1, 0, 0)));
         }
     }
 }

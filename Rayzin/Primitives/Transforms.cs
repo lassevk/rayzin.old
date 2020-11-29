@@ -13,5 +13,19 @@ namespace Rayzin.Primitives
             var sin = Math.Sin(radians);
             return new MatrixF(4, 1, 0, 0, 0, 0, cos, -sin, 0, 0, sin, cos, 0, 0, 0, 0, 1);
         }
+
+        public static MatrixF RotationY(double radians)
+        {
+            var cos = Math.Cos(radians);
+            var sin = Math.Sin(radians);
+            return new MatrixF(4, cos, 0, sin, 0, 0, 1, 0, 0, -sin, 0, cos, 0, 0, 0, 0, 1);
+        }
+
+        public static MatrixF RotationZ(double radians)
+        {
+            var cos = Math.Cos(radians);
+            var sin = Math.Sin(radians);
+            return new MatrixF(4, cos, -sin, 0, 0, sin, cos, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        }
     }
 }
