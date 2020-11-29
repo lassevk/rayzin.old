@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -97,6 +98,8 @@ namespace Rayzin.Primitives
             return new MatrixF(4, result);
         }
 
+        public static Point3D operator *(MatrixF m, Point3D p) => (Point3D)(m * (TupleF)p);
+        public static Vector3D operator *(MatrixF m, Vector3D v) => (Vector3D)(m * (TupleF)v);
         public static TupleF operator *(MatrixF m, TupleF t)
         {
             if (m.Size != t.Length)
