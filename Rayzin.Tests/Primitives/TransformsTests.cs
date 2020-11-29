@@ -116,5 +116,20 @@ namespace Rayzin.Tests.Primitives
             Assert.That(halfQuarter * p, Is.EqualTo(new Point3D(-Math.Sqrt(2) / 2, Math.Sqrt(2) / 2, 0)));
             Assert.That(fullQuarter * p, Is.EqualTo(new Point3D(-1, 0, 0)));
         }
+
+        [Test]
+        [TestCase(1, 0, 0, 0, 0, 0, 5, 3, 4)]
+        [TestCase(0, 1, 0, 0, 0, 0, 6, 3, 4)]
+        [TestCase(0, 0, 1, 0, 0, 0, 2, 5, 4)]
+        [TestCase(0, 0, 0, 1, 0, 0, 2, 7, 4)]
+        [TestCase(0, 0, 0, 0, 1, 0, 2, 3, 6)]
+        [TestCase(0, 0, 0, 0, 0, 1, 2, 3, 7)]
+        public void ShearingTransform_WithTestCases_ProducesExpectedResults(double xToY, double xToZ, double yToX, double yToZ, double zToX, double zToY, double expectedX, double expectedY, double expectedZ)
+        {
+            MatrixF transform = Transforms.Shearing(xToY, xToZ, yToX, yToZ, zToX, zToY);
+            var p = new Point3D(2, 3, 4);
+            Point3D output = transform * p;
+            Assert.That(output, Is.EqualTo(new Point3D(expectedX, expectedY, expectedZ)));
+        }
     }
 }

@@ -27,5 +27,7 @@ namespace Rayzin.Primitives
             var sin = Math.Sin(radians);
             return new MatrixF(4, cos, -sin, 0, 0, sin, cos, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
         }
+
+        public static MatrixF Shearing(double xToY, double xToZ, double yToX, double yToZ, double zToX, double zToY) => new MatrixF(4, 1, xToY, xToZ, 0, yToX, 1, yToZ, 0, zToX, zToY, 1, 0, 0, 0, 0, 1);
     }
 }
