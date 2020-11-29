@@ -4,6 +4,7 @@ namespace Rayzin.Primitives
 {
     public static class RzTransforms
     {
+        public static readonly RzMatrix None = RzMatrix.Presets.Identity4;
         public static RzMatrix Translation(double x, double y, double z) => new RzMatrix(4, 1, 0, 0, x, 0, 1, 0, y, 0, 0, 1, z, 0, 0, 0, 1);
         public static RzMatrix Scaling(double x, double y, double z) => new RzMatrix(4, x, 0, 0, 0, 0, y, 0, 0, 0, 0, z, 0, 0, 0, 0, 1);
 

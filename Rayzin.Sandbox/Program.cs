@@ -19,6 +19,7 @@ namespace Rayzin.Sandbox
             var half = wallSize / 2;
 
             var shape = new RzSphere();
+            shape.Transformation = RzTransforms.None.Shear(1, 0, 0, 0, 0, 0).Scale(0.5, 0.25, 0.5).Shear(-1, 0, 0, 0, 0, 0).Scale(2, 4, 2);
             for (var y = 0; y < canvas.Height; y++)
             {
                 var worldY = half - pixelSize * y;
