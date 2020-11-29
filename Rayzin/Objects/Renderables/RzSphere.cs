@@ -2,9 +2,9 @@
 
 using Rayzin.Primitives;
 
-namespace Rayzin.Objects
+namespace Rayzin.Objects.Renderables
 {
-    public class RzSphere : RzObject
+    public class RzSphere : RzRenderable
     {
         public override RzIntersectionsCollection Intersect(RzRay ray)
         {

@@ -1,4 +1,4 @@
-﻿using Rayzin.Objects;
+﻿using Rayzin.Objects.Renderables;
 
 namespace Rayzin.Primitives
 {
@@ -12,7 +12,7 @@ namespace Rayzin.Primitives
 
         public RzPoint Position(double t) => Origin + Direction * t;
 
-        public RzIntersectionsCollection Intersect(RzObject obj) => obj.Intersect(this);
+        public RzIntersectionsCollection Intersect(RzRenderable obj) => obj.Intersect(this);
 
         public RzRay Transform(RzMatrix transformation) => new RzRay(transformation * Origin, transformation * Direction);
     }

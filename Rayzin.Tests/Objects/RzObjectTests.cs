@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-using Rayzin.Objects;
+using Rayzin.Objects.Renderables;
 using Rayzin.Primitives;
 
 namespace Rayzin.Tests.Objects

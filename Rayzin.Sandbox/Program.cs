@@ -1,7 +1,6 @@
-﻿using System;
-using System.Drawing.Imaging;
+﻿using System.Drawing.Imaging;
 
-using Rayzin.Objects;
+using Rayzin.Objects.Renderables;
 using Rayzin.Primitives;
 
 namespace Rayzin.Sandbox

@@ -7,7 +7,7 @@ namespace Rayzin.Primitives
         public struct Presets
         {
             public static readonly RzPoint Zero = new RzPoint(0, 0, 0);
-            public static readonly RzPoint Origo = new RzPoint(0, 0, 0);
+            public static readonly RzPoint Origin = new RzPoint(0, 0, 0);
         }
 
         public RzPoint(double x, double y, double z) => (X, Y, Z) = (x, y, z);

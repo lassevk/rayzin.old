@@ -2,7 +2,7 @@
 
 using NUnit.Framework;
 
-using Rayzin.Objects;
+using Rayzin.Objects.Renderables;
 using Rayzin.Primitives;
 
 // ReSharper disable ObjectCreationAsStatement
