@@ -20,6 +20,8 @@ namespace Rayzin.Tests.Objects
             Assert.That(xs[0].Object, Is.SameAs(s));
             Assert.That(xs[1].Time, Is.EqualTo(6));
             Assert.That(xs[1].Object, Is.SameAs(s));
+
+            Assert.That(xs.Hit(), Is.EqualTo(xs[0]));
         }
 
         [Test]
@@ -31,6 +33,8 @@ namespace Rayzin.Tests.Objects
             Intersections xs = r.Intersect(s);
             Assert.That(xs.Count, Is.EqualTo(1));
             Assert.That(xs[0].Time, Is.EqualTo(5));
+
+            Assert.That(xs.Hit(), Is.EqualTo(xs[0]));
         }
 
         [Test]
@@ -41,6 +45,8 @@ namespace Rayzin.Tests.Objects
 
             Intersections xs = r.Intersect(s);
             Assert.That(xs.Count, Is.EqualTo(0));
+
+            Assert.That(xs.Hit(), Is.Null);
         }
 
         [Test]
@@ -53,6 +59,8 @@ namespace Rayzin.Tests.Objects
             Assert.That(xs.Count, Is.EqualTo(2));
             Assert.That(xs[0].Time, Is.EqualTo(-1));
             Assert.That(xs[1].Time, Is.EqualTo(1));
+            
+            Assert.That(xs.Hit(), Is.EqualTo(xs[1]));
         }
 
         [Test]
@@ -65,6 +73,8 @@ namespace Rayzin.Tests.Objects
             Assert.That(xs.Count, Is.EqualTo(2));
             Assert.That(xs[0].Time, Is.EqualTo(-6));
             Assert.That(xs[1].Time, Is.EqualTo(-4));
+
+            Assert.That(xs.Hit(), Is.Null);
         }
     }
 }

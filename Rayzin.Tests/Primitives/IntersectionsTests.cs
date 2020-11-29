@@ -30,5 +30,18 @@ namespace Rayzin.Tests.Primitives
             Assert.That(i[0].Time, Is.EqualTo(1));
             Assert.That(i[1].Time, Is.EqualTo(2));
         }
+
+        [Test]
+        public void Hit_WithRandomOrder_ProducesCorrectResults()
+        {
+            var s = new Sphere();
+            var i1 = new Intersection(s, 5);
+            var i2 = new Intersection(s, 7);
+            var i3 = new Intersection(s, -3);
+            var i4 = new Intersection(s, 2);
+            var i = new Intersections(i1, i2, i3, i4);
+
+            Assert.That(i.Hit(), Is.EqualTo(i4));
+        }
     }
 }
