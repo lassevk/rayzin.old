@@ -34,5 +34,15 @@ namespace Rayzin.Tests
                     },
                 }, world.Objects.OfType<RzRenderable>());
         }
+
+        [Test]
+        public void IntersectAWorldWithARay()
+        {
+            var w = new RzWorld();
+            var r = new RzRay((0, 0, -5), (0, 0, 1));
+            var xs = w.Intersect(r);
+
+            CollectionAssert.AreEqual(new[] { 4, 4.5, 5.5, 6 }, xs.Select(s => s.Time));
+        }
     }
 }

@@ -11,6 +11,8 @@ namespace Rayzin.Primitives
 
         public RzIntersectionsCollection(params RzIntersection[] intersections)
             => _Intersections = (intersections ?? throw new ArgumentNullException(nameof(intersections))).ToArray();
+        public RzIntersectionsCollection(IEnumerable<RzIntersection> intersections)
+            => _Intersections = (intersections ?? throw new ArgumentNullException(nameof(intersections))).ToArray();
 
         public RzIntersection this[int index] => _Intersections?[index] ?? default;
 
