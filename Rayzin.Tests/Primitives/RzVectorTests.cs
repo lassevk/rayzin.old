@@ -231,7 +231,7 @@ namespace Rayzin.Tests.Primitives
 
         [Test]
         [TestCase(1, -1, 0, 0, 1, 0, 1, 1, 0, TestName = "Vector approaching at 45 degrees")]
-        [TestCase(0, -1, 0, 0.70710678118655D, 0.70710678118655D, 0, 1, 0, 0)]
+        [TestCase(0, -1, 0, 0.70710678118655D, 0.70710678118655D, 0, 1, 0, 0, TestName = "Reflecting a vector off a slanted surface")]
         public void Reflect_WithTestCases_ProducesExpectedResults(double vectorX, double vectorY, double vectorZ, double normalX, double normalY, double normalZ, double expectedX, double expectedY, double expectedZ)
         {
             RzVector vector = (vectorX, vectorY, vectorZ);
