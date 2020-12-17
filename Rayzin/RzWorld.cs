@@ -14,12 +14,15 @@ namespace Rayzin
 {
     public class RzWorld
     {
-        public RzWorld()
+        public static RzWorld DefaultWorld() => new RzWorld
         {
-            Objects.Add(new RzPointLight((-10, 10, -10), RzColor.Presets.White));
-            Objects.Add(new RzSphere { Material = new RzPhongMaterial { Color = (0.8, 1.0, 0.6), Diffuse = 0.7, Specular = 0.2 } });
-            Objects.Add(new RzSphere { Transformation = RzTransforms.None.Scale(0.5) });
-        }
+            Objects =
+            {
+                new RzPointLight((-10, 10, -10), RzColor.Presets.White),
+                new RzSphere { Material = new RzPhongMaterial { Color = (0.8, 1.0, 0.6), Diffuse = 0.7, Specular = 0.2 } },
+                new RzSphere { Transformation = RzTransforms.None.Scale(0.5) },
+            }
+        };
 
         public List<RzObject> Objects { get; } = new();
 
