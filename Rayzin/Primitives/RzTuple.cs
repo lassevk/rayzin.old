@@ -18,8 +18,8 @@ namespace Rayzin.Primitives
 
         public int Length => _Values?.Length ?? 0;
 
-        public static implicit operator RzTuple(RzPoint p) => new RzTuple(p.X, p.Y, p.Z, 1);
-        public static implicit operator RzTuple(RzVector v) => new RzTuple(v.X, v.Y, v.Z, 0);
+        public static implicit operator RzTuple(RzPoint p) => new(p.X, p.Y, p.Z, 1);
+        public static implicit operator RzTuple(RzVector v) => new(v.X, v.Y, v.Z, 0);
 
         public static explicit operator RzPoint(RzTuple t)
         {

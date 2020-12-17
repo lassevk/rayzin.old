@@ -2,7 +2,7 @@ using Rayzin.Primitives;
 
 namespace Rayzin.Sandbox
 {
-    internal struct Projectile
+    internal readonly struct Projectile
     {
         public Projectile(RzPoint position, RzVector velocity) => (Position, Velocity) = (position, velocity);
 

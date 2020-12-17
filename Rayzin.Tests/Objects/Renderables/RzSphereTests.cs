@@ -5,9 +5,8 @@ using NUnit.Framework;
 using Rayzin.Materials;
 using Rayzin.Objects.Renderables;
 using Rayzin.Primitives;
-using Rayzin.Tests.Materials;
 
-namespace Rayzin.Tests.Objects
+namespace Rayzin.Tests.Objects.Renderables
 {
     [TestFixture]
     public class RzSphereTests
@@ -143,12 +142,9 @@ namespace Rayzin.Tests.Objects
         [Test]
         public void ASphereMayBeAssignedAMaterial()
         {
-            var s = new RzSphere();
-            var m = new RzPhongMaterial();
-            m.Ambient = 1.0;
-            s.Material = m;
+            var s = new RzSphere { Material = new RzPhongMaterial { Ambient = 1.0 } };
 
-            Assert.That(s.Material, Is.EqualTo(m));
+            Assert.That(s.Material, Is.EqualTo(new RzPhongMaterial { Ambient = 1.0 }));
         }
     }
 }

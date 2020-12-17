@@ -6,8 +6,8 @@ namespace Rayzin.Primitives
     {
         public struct Presets
         {
-            public static readonly RzPoint Zero = new RzPoint(0, 0, 0);
-            public static readonly RzPoint Origin = new RzPoint(0, 0, 0);
+            public static readonly RzPoint Zero = new(0, 0, 0);
+            public static readonly RzPoint Origin = new(0, 0, 0);
         }
 
         public RzPoint(double x, double y, double z) => (X, Y, Z) = (x, y, z);
@@ -29,10 +29,10 @@ namespace Rayzin.Primitives
 
         public override string ToString() => $"RzPoint ({X}, {Y}, {Z})";
 
-        public static RzVector operator -(RzPoint p1, RzPoint p2) => new RzVector(p1.X - p2.X, p1.Y - p2.Y, p1.Z - p2.Z);
-        public static RzPoint operator +(RzPoint p, RzVector v) => new RzPoint(p.X + v.X, p.Y + v.Y, p.Z + v.Z);
+        public static RzVector operator -(RzPoint p1, RzPoint p2) => new(p1.X - p2.X, p1.Y - p2.Y, p1.Z - p2.Z);
+        public static RzPoint operator +(RzPoint p, RzVector v) => new(p.X + v.X, p.Y + v.Y, p.Z + v.Z);
 
-        public static implicit operator RzPoint((double x, double y, double z) tuple) => new RzPoint(tuple.x, tuple.y, tuple.z);
+        public static implicit operator RzPoint((double x, double y, double z) tuple) => new(tuple.x, tuple.y, tuple.z);
         public static implicit operator (double x, double y, double z)(RzPoint point) => (point.X, point.Y, point.Z);
     }
 }

@@ -1,10 +1,13 @@
 using System;
 using System.Drawing;
 
+using JetBrains.Annotations;
+
 namespace Rayzin.Primitives
 {
     public readonly struct RzColor : IEquatable<RzColor>
     {
+        [PublicAPI]
         public struct Presets
         {
             public static readonly RzColor Black = (0, 0, 0);
@@ -34,15 +37,15 @@ namespace Rayzin.Primitives
 
         public static bool operator !=(RzColor left, RzColor right) => !left.Equals(right);
 
-        public static RzColor operator +(RzColor c1, RzColor c2) => new RzColor(c1.Red + c2.Red, c1.Green + c2.Green, c1.Blue + c2.Blue);
-        public static RzColor operator -(RzColor c1, RzColor c2) => new RzColor(c1.Red - c2.Red, c1.Green - c2.Green, c1.Blue - c2.Blue);
-        public static RzColor operator -(RzColor c) => new RzColor(-c.Red, -c.Green, -c.Blue);
+        public static RzColor operator +(RzColor c1, RzColor c2) => new(c1.Red + c2.Red, c1.Green + c2.Green, c1.Blue + c2.Blue);
+        public static RzColor operator -(RzColor c1, RzColor c2) => new(c1.Red - c2.Red, c1.Green - c2.Green, c1.Blue - c2.Blue);
+        public static RzColor operator -(RzColor c) => new(-c.Red, -c.Green, -c.Blue);
 
-        public static RzColor operator *(RzColor c, double scalar) => new RzColor(c.Red * scalar, c.Green * scalar, c.Blue * scalar);
-        public static RzColor operator *(double scalar, RzColor c) => new RzColor(c.Red * scalar, c.Green * scalar, c.Blue * scalar);
-        public static RzColor operator *(RzColor c1, RzColor c2) => new RzColor(c1.Red * c2.Red, c1.Green * c2.Green, c1.Blue * c2.Blue);
+        public static RzColor operator *(RzColor c, double scalar) => new(c.Red * scalar, c.Green * scalar, c.Blue * scalar);
+        public static RzColor operator *(double scalar, RzColor c) => new(c.Red * scalar, c.Green * scalar, c.Blue * scalar);
+        public static RzColor operator *(RzColor c1, RzColor c2) => new(c1.Red * c2.Red, c1.Green * c2.Green, c1.Blue * c2.Blue);
 
-        public static RzColor operator /(RzColor c, double scalar) => new RzColor(c.Red / scalar, c.Green / scalar, c.Blue / scalar);
+        public static RzColor operator /(RzColor c, double scalar) => new(c.Red / scalar, c.Green / scalar, c.Blue / scalar);
 
         public override string ToString() => $"RzColor ({Red}, {Green}, {Blue})";
 
@@ -57,7 +60,7 @@ namespace Rayzin.Primitives
             return new RzColor(Red / magnitude, Green / magnitude, Blue / magnitude);
         }
 
-        public RzColor Clamp() => new RzColor(Math.Min(Math.Max(0, Red), 1), Math.Min(Math.Max(0, Green), 1), Math.Min(Math.Max(0, Blue), 1));
+        public RzColor Clamp() => new(Math.Min(Math.Max(0, Red), 1), Math.Min(Math.Max(0, Green), 1), Math.Min(Math.Max(0, Blue), 1));
 
         public Color ToColor()
         {
@@ -65,7 +68,7 @@ namespace Rayzin.Primitives
             return Color.FromArgb((int)(255 * c.Red), (int)(255 * c.Green), (int)(255 * c.Blue));
         }
 
-        public static implicit operator RzColor((double red, double green, double blue) tuple) => new RzColor(tuple.red, tuple.green, tuple.blue);
+        public static implicit operator RzColor((double red, double green, double blue) tuple) => new(tuple.red, tuple.green, tuple.blue);
         public static implicit operator (double red, double green, double blue)(RzColor color) => (color.Red, color.Green, color.Blue);
 
     }

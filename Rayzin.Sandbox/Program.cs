@@ -52,12 +52,5 @@ namespace Rayzin.Sandbox
 
             canvas.ToBitmap().Save(@"D:\Temp\test.png", ImageFormat.Png);
         }
-
-        private static Projectile Tick(Environment env, Projectile proj)
-        {
-            RzPoint position = proj.Position + proj.Velocity;
-            RzVector velocity = proj.Velocity + env.Gravity + env.Wind;
-            return new Projectile(position, velocity);
-        }
     }
 }

@@ -14,6 +14,6 @@ namespace Rayzin.Primitives
 
         public RzIntersectionsCollection Intersect(RzRenderable obj) => obj.Intersect(this);
 
-        public RzRay Transform(RzMatrix transformation) => new RzRay(transformation * Origin, transformation * Direction);
+        public RzRay Transform(RzMatrix transformation) => new(transformation * Origin, transformation * Direction);
     }
 }

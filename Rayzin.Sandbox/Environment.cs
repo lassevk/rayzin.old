@@ -2,7 +2,7 @@ using Rayzin.Primitives;
 
 namespace Rayzin.Sandbox
 {
-    public struct Environment
+    public readonly struct Environment
     {
         public Environment(RzVector gravity, RzVector wind) => (Gravity, Wind) = (gravity, wind);
 

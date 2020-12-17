@@ -31,14 +31,14 @@ namespace Rayzin.Primitives
         
         public override string ToString() => $"RzVector ({X}, {Y}, {Z})";
 
-        public static RzVector operator +(RzVector v1, RzVector v2) => new RzVector(v1.X + v2.X, v1.Y + v2.Y, v1.Z + v2.Z);
-        public static RzVector operator -(RzVector v1, RzVector v2) => new RzVector(v1.X - v2.X, v1.Y - v2.Y, v1.Z - v2.Z);
-        public static RzVector operator -(RzVector v) => new RzVector(-v.X, -v.Y, -v.Z);
+        public static RzVector operator +(RzVector v1, RzVector v2) => new(v1.X + v2.X, v1.Y + v2.Y, v1.Z + v2.Z);
+        public static RzVector operator -(RzVector v1, RzVector v2) => new(v1.X - v2.X, v1.Y - v2.Y, v1.Z - v2.Z);
+        public static RzVector operator -(RzVector v) => new(-v.X, -v.Y, -v.Z);
 
-        public static RzVector operator *(RzVector v, double scalar) => new RzVector(v.X * scalar, v.Y * scalar, v.Z * scalar);
-        public static RzVector operator *(double scalar, RzVector v) => new RzVector(v.X * scalar, v.Y * scalar, v.Z * scalar);
+        public static RzVector operator *(RzVector v, double scalar) => new(v.X * scalar, v.Y * scalar, v.Z * scalar);
+        public static RzVector operator *(double scalar, RzVector v) => new(v.X * scalar, v.Y * scalar, v.Z * scalar);
         
-        public static RzVector operator /(RzVector v, double scalar) => new RzVector(v.X / scalar, v.Y / scalar, v.Z / scalar);
+        public static RzVector operator /(RzVector v, double scalar) => new(v.X / scalar, v.Y / scalar, v.Z / scalar);
 
         public double Magnitude => Math.Sqrt(X * X + Y * Y + Z * Z);
 
@@ -55,11 +55,11 @@ namespace Rayzin.Primitives
         }
 
         public double Dot(RzVector v) => X * v.X + Y * v.Y + Z * v.Z;
-        public RzVector Cross(RzVector v) => new RzVector(Y * v.Z - Z * v.Y, Z * v.X - X * v.Z, X * v.Y - Y * v.X);
+        public RzVector Cross(RzVector v) => new(Y * v.Z - Z * v.Y, Z * v.X - X * v.Z, X * v.Y - Y * v.X);
 
         public RzVector Reflect(RzVector normalVector) => this - normalVector * 2 * this.Dot(normalVector);
 
-        public static implicit operator RzVector((double x, double y, double z) tuple) => new RzVector(tuple.x, tuple.y, tuple.z);
+        public static implicit operator RzVector((double x, double y, double z) tuple) => new(tuple.x, tuple.y, tuple.z);
         public static implicit operator (double x, double y, double z)(RzVector vector) => (vector.X, vector.Y, vector.Z);
     }
 }
