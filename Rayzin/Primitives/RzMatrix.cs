@@ -223,6 +223,7 @@ namespace Rayzin.Primitives
         public RzMatrix RotateX(double radians) => RzTransforms.RotationX(radians) * this;
         public RzMatrix RotateY(double radians) => RzTransforms.RotationY(radians) * this;
         public RzMatrix RotateZ(double radians) => RzTransforms.RotationZ(radians) * this;
+        public RzMatrix Scale(double factor) => Scale(factor, factor, factor);
         public RzMatrix Scale(double x, double y, double z) => RzTransforms.Scaling(x, y, z) * this;
         public RzMatrix Translate(double x, double y, double z) => RzTransforms.Translation(x, y, z) * this;
         public RzMatrix Shear(double xToY, double xToZ, double yToX, double yToZ, double zToX, double zToY) => RzTransforms.Shearing(xToY, xToZ, yToX, yToZ, zToX, zToY) * this;
