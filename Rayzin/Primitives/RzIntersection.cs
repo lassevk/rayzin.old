@@ -1,14 +1,15 @@
 ﻿using System;
 
 using Rayzin.Objects;
+using Rayzin.Objects.Renderables;
 
 namespace Rayzin.Primitives
 {
     public readonly struct RzIntersection : IEquatable<RzIntersection>
     {
-        public RzIntersection(RzObject obj, double time) => (Object, Time) = (obj ?? throw new ArgumentNullException(nameof(obj)), time);
+        public RzIntersection(RzRenderable obj, double time) => (Object, Time) = (obj ?? throw new ArgumentNullException(nameof(obj)), time);
 
-        public RzObject Object { get; }
+        public RzRenderable Object { get; }
 
         public double Time { get; }
 

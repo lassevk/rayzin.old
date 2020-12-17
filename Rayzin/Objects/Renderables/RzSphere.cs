@@ -28,7 +28,7 @@ namespace Rayzin.Objects.Renderables
             return new RzIntersectionsCollection(new RzIntersection(this, t1), new RzIntersection(this, t2));
         }
 
-        public RzVector NormalAt(RzPoint worldPoint)
+        public override RzVector NormalAt(RzPoint worldPoint)
         {
             RzPoint objectPoint = InverseTransformation * worldPoint;
             RzVector objectNormal = new RzVector(objectPoint.X, objectPoint.Y, objectPoint.Z).Normalize();

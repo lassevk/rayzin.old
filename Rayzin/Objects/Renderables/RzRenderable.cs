@@ -19,5 +19,7 @@ namespace Rayzin.Objects.Renderables
         public RzMatrix InverseTransformation => _InverseTransformation;
 
         public RzMaterial Material { get; set; } = new RzPhongMaterial();
+
+        public abstract RzVector NormalAt(RzPoint worldPoint);
     }
 }
