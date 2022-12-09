@@ -3,6 +3,8 @@ using System.Drawing;
 
 using JetBrains.Annotations;
 
+using SkiaSharp;
+
 namespace Rayzin.Primitives
 {
     public readonly struct RzColor : IEquatable<RzColor>
@@ -62,10 +64,10 @@ namespace Rayzin.Primitives
 
         public RzColor Clamp() => new(Math.Min(Math.Max(0, Red), 1), Math.Min(Math.Max(0, Green), 1), Math.Min(Math.Max(0, Blue), 1));
 
-        public Color ToColor()
+        public SKColor ToColor()
         {
             RzColor c = Clamp();
-            return Color.FromArgb((int)(255 * c.Red), (int)(255 * c.Green), (int)(255 * c.Blue));
+            return new SKColor((byte)(255 * c.Red), (byte)(255 * c.Green), (byte)(255 * c.Blue));
         }
 
         public static implicit operator RzColor((double red, double green, double blue) tuple) => new(tuple.red, tuple.green, tuple.blue);

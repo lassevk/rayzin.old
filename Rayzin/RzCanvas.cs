@@ -8,6 +8,8 @@ using JetBrains.Annotations;
 
 using Rayzin.Primitives;
 
+using SkiaSharp;
+
 namespace Rayzin
 {
     public class RzCanvas
@@ -104,9 +106,9 @@ namespace Rayzin
             return result.ToString();
         }
 
-        public Bitmap ToBitmap()
+        public SKBitmap ToBitmap()
         {
-            var bitmap = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
+            var bitmap = new SKBitmap(Width, Height, SKColorType.Rgb888x, SKAlphaType.Opaque);
             for (var y = 0; y < Height; y++)
                 for (var x = 0; x < Width; x++)
                     bitmap.SetPixel(x, y, this[x, y].ToColor());
